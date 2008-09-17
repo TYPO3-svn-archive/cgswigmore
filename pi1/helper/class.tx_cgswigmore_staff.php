@@ -51,14 +51,14 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		);
 	}
 
-	protected function fillTemplate() {
+	protected function fillTemplate($select = array()) {
 		/*
 		 * Get the staff UID. If the UID is set (x != NULL && x > 0), we have selected
 		 * a staff and display him in detail view.
 		 *
 		 * @var int
 		 */
-		$uid = intval($this->getGPValue('sta_uid')); /* TODO: rename sta_uid */
+		$uid = intval($this->getGvalue('sta_uid')); /* TODO: rename sta_uid */
 
 		if (!is_null($uid) && $uid > 0) {
 			$this->masterTemplateMarker = '###TEMPLATE_DETAIL###';
@@ -92,7 +92,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$subpartArray['###STAFF_MOBILE_ITEM###'] = $this->fillRowSubpartTemplate($row, 'mobile', $template, '###STAFF_MOBILE_ITEM###', $markerArray);
 		$subpartArray['###STAFF_FAX_ITEM###'] = $this->fillRowSubpartTemplate($row, 'fax', $template, '###STAFF_FAX_ITEM###', $markerArray);
 		$subpartArray['###STAFF_MAIL_ITEM###'] = $this->fillRowSubpartTemplate($row, 'mail', $template, '###STAFF_MAIL_ITEM###', $markerArray);
-		#$subpartArray['###TEMPLATE_STAFF_PUBLICATION###'] = $this->fillRowSubpartPublicationTemplate($template, $row['uid']);
+		$subpartArray['###TEMPLATE_STAFF_PUBLICATION###'] = $this->fillRowSubpartPublicationTemplate($template, $row['uid']);
 
 		return $this->cObj->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}
@@ -110,13 +110,9 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$publicationUidArr = self::getUserPublicationUids($uid);
 		
 		$publ = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_publication');
-		#$publ->addToSelect('where', 'tx_cgswigmore_publication.uid IN ('.implode(',', $publicationUidArr).')'); // TODO: how to implement the publications?
+		$select['where'][] = 'tx_cgswigmore_publication.uid IN ('.implode(',', $publicationUidArr).')';
 
-		return $publ->init();
-		
-		$subpartArray['###TEMPLATE_STAFF_PUBLICATION###'] = $publ->init();
-		
-		return $this->cObj->substituteMarkerArrayCached($sTemplate, array(), $subpartArray);
+		return $publ->init($select);
 	}
 	
 	private function getDbResult($sort, $select = array()) {
@@ -127,7 +123,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$select['sort'] = $sort;
 
 		// find out if the current or the archived members should be displayed.
-		$staffSelect = intval($this->getGPValue('sta_state')); /* TODO: rename sta_state */
+		$staffSelect = intval($this->getGvalue('sta_state')); /* TODO: rename sta_state */
 		
 		if ($staffSelect === self::STAFF_SELECT_ARCHIVED) {
 			$this->masterTemplateMarker = '###TEMPLATE_ARCHIVED###';

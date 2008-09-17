@@ -69,15 +69,15 @@ abstract class tx_cgswigmore_helper_base {
 		$this->cObj = &$reference->cObj;
 	}
 
-	public function init() {
+	public function init($select = array()) {
 		if (is_null($this->setTemplate())) {
 			t3lib_div::debug("template error");
 		}
 
-		return $this->fillTemplate();
+		return $this->fillTemplate($select);
 	}
 
-	protected abstract function fillTemplate();
+	protected abstract function fillTemplate($select = array());
 	protected abstract function getMarker($row);
 
 	/**
@@ -256,8 +256,17 @@ abstract class tx_cgswigmore_helper_base {
 		return '';
 	}
 
-	protected function getGPValue($key) {
-		$params = t3lib_div::_GP('tx_cgswigmore_pi1');
+	protected function getGvalue($key) {
+		$params = t3lib_div::_GET('tx_cgswigmore_pi1');
+
+		if (isset($params[$key])) {
+			return $params[$key];
+		}
+		return NULL;
+	}
+	
+	protected function getPvalue($key) {
+		$params = t3lib_div::_POST('tx_cgswigmore_pi1');
 
 		if (isset($params[$key])) {
 			return $params[$key];
@@ -347,7 +356,7 @@ abstract class tx_cgswigmore_helper_base {
 		$res = self::getSelectDbRes($select);
 
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0)
-			return array();
+			return array(0);
 		
 		$publicationUidArr = array();
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {

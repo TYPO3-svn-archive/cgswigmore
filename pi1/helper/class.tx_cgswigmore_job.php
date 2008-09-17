@@ -33,7 +33,7 @@ require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmor
  */
 class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 
-	protected function fillTemplate() {
+	protected function fillTemplate($select = array()) {
 		
 	}
 	

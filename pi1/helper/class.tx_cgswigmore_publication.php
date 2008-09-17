@@ -62,14 +62,13 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 * @see pi1/helper/tx_cgswigmore_helper_base#fillTemplate()
 	 * @return 	string	The result of the publication view
 	 */
-	protected function fillTemplate() {
-		#t3lib_div::debug(array($this->masterTemplateMarker => $this->conf));
+	protected function fillTemplate($select = array()) {
 		$view = $this->conf['view'];
 
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_VIEW_LPY###', '###TEMPLATE_PUBLICATION_ROW###'));
 		if (strncmp($view, 'LPY', 3) == 0) { /* LPY */
 			$subpartArray['###TEMPLATE_VIEW_LPY###'] = $this->fillTemplateViewLpy($template['item0']);
-			$year = intval($this->getGPValue('year'));
+			$year = intval($this->getPvalue('year'));
 				
 			if (!is_null($year) && strlen($year) == 4) {
 				$under = mktime(0,0,0,1,1,$year);
@@ -82,7 +81,8 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 				$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = '';
 			}
 		} else { /* AIO */
-			$rowRes = $this->getDbResult($this->conf['sort']);
+			$rowRes = $this->getDbResult($this->conf['sort'], $select);
+			#t3lib_div::debug($GLOBALS['TYPO3_DB']->sql_num_rows($rowRes));
 			$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = $this->fillPublicationTemplate($rowRes, $template['item1']);
 			$subpartArray['###TEMPLATE_VIEW_LPY###'] = '';
 		}
@@ -105,7 +105,7 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 */
 	private function fillTemplateViewLpy($template) {
 		$yearArr = $this->getUniqueYears();
-		$sYear = intval($this->getGPValue('year'));
+		$sYear = intval($this->getPvalue('year'));
 		$content = '';
 		$subTemplate = $this->cObj->getSubpart($template, '###TEMPLATE_VIEW_LPY_YEAR_ROW###');
 

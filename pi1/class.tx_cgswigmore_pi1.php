@@ -87,6 +87,8 @@ class tx_cgswigmore_pi1 extends tslib_pibase {
 				break;
 			case 'SECTION':
 				$content .= $this->displaySections($conf['section.']);
+				#$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_section');
+				#$content .= $cgswigmoreObj->init();
 				break;
 			case 'LOCATION':
 				$content .= $this->displayLocation($conf['location.']);

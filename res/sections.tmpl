@@ -1,0 +1,154 @@
+Template markers:
+TEMPLATE
+SECT_DETAIL_DESC
+SECT_DETAIL_FILE
+SEC_DETAIL_FILE_ROW
+SECT_DETAIL_STAFF
+STAF_SUBPART_WITH_LINKS
+STAF_ROW
+STAF_SUBPART_WITHOUT_LINKS
+SECT_DETAIL_PUBLICATIONS
+PUBL_ITEM_ROW
+PUBL_ITEM_WITH_PUBMED_LINK
+PUBL_ITEM_WITHOUT_PUBMED_LINK
+
+Text markers:
+###SECT_SECTION###
+###SECT_TITLE###
+###SECT_DETAIL_TEXT###
+###SECT_IMAGE###
+###SECT_LINK###
+###SECT_MENU_LINK_CLASS###
+###SECT_MENU_LINK###
+###SECT_MENU_TEXT###
+###SECT_LEADER1###
+###SECT_LEADER2###
+###SECT_FILE_TITLE###
+###SEC_FILE_NAME###
+###SEC_FILE_DESC###
+
+For the publication's markers please see:
+- publications.tmpl
+
+For the staff's markers please see:
+- staff.tmpl
+
+<!-- ###TEMPLATE### begin -->
+
+	<!-- ###SEC_ITEM### begin -->
+		<div class="tx-cgswigmore-pi1-DIV-box">
+			<div class="tx-cgswigmore-pi1-DIV-image">
+				###SECT_IMAGE###
+			</div>
+			
+			<h1>
+				<a class="tx-cgswigmore-pi1-H1-link" href="###SECT_LINK###">
+					###SECT_SECTION###
+				</a>
+			</h1>
+			<p class="tx-cgswigmore-pi1-P-title">
+				###SECT_TITLE###
+			</p>
+			<p class="tx-cgswigmore-pi1-P-leaders">
+				###SECT_LEADER1### / ###SECT_LEADER2###
+			</p>
+		</div>
+	<!-- ###SEC_ITEM### end -->
+
+<!-- ###TEMPLATE### end -->
+
+<!-- ###TEMPLATEDETAIL### begin -->
+	<div class="tx-cgswigmore-pi1-DIV-detail">
+		<div class="tx-cgswigmore-pi1-DIV-menu">
+			<ul>
+				<!-- ###SECT_MENUITEM### begin -->
+					<li class="bullet"><a class="###SECT_MENU_LINK_CLASS###" href="###SECT_MENU_LINK###">###SECT_MENU_TEXT###</a></li>
+				<!-- ###SECT_MENUITEM### end -->
+			</ul>
+		</div>
+		
+		<div class="tx-cgswigmore-pi1-DIV-box2">
+			<h1>
+				###SECT_TITLE### (###SECT_SECTION###)
+			</h1>
+			<p>
+				<!-- ###SECT_DETAIL_DESC### begin -->
+					<p>
+						###SECT_DETAIL_TEXT###
+					</p>
+					<br /><br />
+					<!-- ###SECT_DETAIL_FILE### begin -->
+						<table border="1">
+							<tr>
+								<td colspan="2">
+									<h2>
+										###SECT_FILE_TITLE###
+									</h2>
+								</td>
+							</tr>
+							
+							<!-- ###SEC_DETAIL_FILE_ROW### begin -->
+							<tr>
+								<td>
+									###SEC_FILE_NAME###
+								</td>
+								<td>
+									###SEC_FILE_DESC###
+								</td>
+							</tr>
+							<!-- ###SEC_DETAIL_FILE_ROW### end -->
+						</table>
+					<!-- ###SECT_DETAIL_FILE### end -->
+				<!-- ###SECT_DETAIL_DESC### end -->
+				
+				<!-- ###SECT_DETAIL_STAFF### begin -->
+					<!-- ###STAF_SUBPART_WITH_LINKS### begin -->
+					<ul>
+						<!-- ###STAF_ROW### begin -->
+							<li class="tx-cgswigmore-pi1-LI-person">
+								<a href="###STAF_PERSON_LINK###">
+									###STAF_FIRSTNAME### <b>###STAF_SURNAME###</b>
+								</a>
+							</li>
+						<!-- ###STAF_ROW### end -->
+					</ul>
+					<!-- ###STAF_SUBPART_WITH_LINKS### end -->
+					
+					<!-- ###STAF_SUBPART_WITHOUT_LINKS### begin -->
+					<ul>
+						<!-- ###STAF_ROW### begin -->
+							<li class="tx-cgswigmore-pi1-LI-person">
+								###STAF_FIRSTNAME### <b>###STAF_SURNAME###</b>
+							</li>
+						<!-- ###STAF_ROW### end -->
+					</ul>
+					<!-- ###STAF_SUBPART_WITHOUT_LINKS### end -->
+				<!-- ###SECT_DETAIL_STAFF### end -->
+				
+				<!-- ###SECT_DETAIL_PUBLICATIONS### begin -->
+					<!-- ###PUBL_ITEM_ROW### begin -->
+						<p class="tx-cgswigmore-pi1-P-title">
+							<!-- ###PUBL_ITEM_WITH_PUBMED_LINK### begin -->
+								<a href="###PUBMED_LINK###" target="_blank">
+									###PUBL_NAME###
+								</a>
+							<!-- ###PUBL_ITEM_WITH_PUBMED_LINK### end -->
+							
+							<!-- ###PUBL_ITEM_WITHOUT_PUBMED_LINK### begin -->
+								###PUBL_NAME###
+							<!-- ###PUBL_ITEM_WITHOUT_PUBMED_LINK### end -->
+						</p>
+						<p class="tx-cgswigmore-pi1-P-author">
+							###PUBL_AUTHORS###
+						</p>
+						<p class="tx-cgswigmore-pi1-P-journal">
+							###PUBL_JOURNAL### ###PUBL_DATE###; ###PUBL_VOLUME###(###PUBL_NUMBER###)###PUBL_PAGES###. ###PUBL_NOTE###
+						</p>
+					<!-- ###PUBL_ITEM_ROW### end -->
+				<!-- ###SECT_DETAIL_PUBLICATIONS### end -->
+			</p>
+		</div>
+	</div>
+<!-- ###TEMPLATEDETAIL### end -->
+
+

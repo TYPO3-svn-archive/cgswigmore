@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'cgswigmore'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Company managment tool</label>
+			<label index="tx_cgswigmore_location">Location</label>
+			<label index="tx_cgswigmore_location.title">Location</label>
+			<label index="tx_cgswigmore_location.address">Address</label>
+			<label index="tx_cgswigmore_location.zip">ZIP</label>
+			<label index="tx_cgswigmore_location.city">City</label>
+			<label index="tx_cgswigmore_location.country">Country</label>
+			<label index="tx_cgswigmore_location.mail">E-Mail</label>
+			<label index="tx_cgswigmore_location.phone">Phone</label>
+			<label index="tx_cgswigmore_location.fax">Fax</label>
+			<label index="tx_cgswigmore_location.description">Description</label>
+			<label index="tx_cgswigmore_location.file">Image</label>
+			<label index="tx_cgswigmore_section">Section</label>
+			<label index="tx_cgswigmore_section.section">Section</label>
+			<label index="tx_cgswigmore_section.title">Title</label>
+			<label index="tx_cgswigmore_section.photo">Group photo</label>
+			<label index="tx_cgswigmore_section.description">Description</label>
+			<label index="tx_cgswigmore_section.leader1">Leader</label>
+			<label index="tx_cgswigmore_section.leader2">Second leader</label>
+			<label index="tx_cgswigmore_section.files">Files</label>
+			<label index="tx_cgswigmore_staff">Staff</label>
+			<label index="tx_cgswigmore_staff.title">Title</label>
+			<label index="tx_cgswigmore_staff.name">Name</label>
+			<label index="tx_cgswigmore_staff.firstname">Firstname</label>
+			<label index="tx_cgswigmore_staff.section">Section</label>
+			<label index="tx_cgswigmore_staff.description">Description</label>
+			<label index="tx_cgswigmore_staff.phone">Phone</label>
+			<label index="tx_cgswigmore_staff.mobile">Mobile</label>
+			<label index="tx_cgswigmore_staff.fax">Fax</label>
+			<label index="tx_cgswigmore_staff.mail">E-Mail</label>
+			<label index="tx_cgswigmore_staff.image">Image</label>
+			<label index="tx_cgswigmore_publication">Publications</label>
+			<label index="tx_cgswigmore_publication.author">Authors</label>
+			<label index="tx_cgswigmore_publication.title">Title</label>
+			<label index="tx_cgswigmore_publication.journal">Journal</label>
+			<label index="tx_cgswigmore_publication.date">Date</label>
+			<label index="tx_cgswigmore_publication.volume">Volume</label>
+			<label index="tx_cgswigmore_publication.number">Number</label>
+			<label index="tx_cgswigmore_publication.pages">Pages</label>
+			<label index="tx_cgswigmore_publication.note">Note</label>
+			<label index="tx_cgswigmore_publication.pmid">Pubmed-ID (PMID)</label>
+			<label index="tx_cgswigmore_publication.staff">Staff memebers</label>
+			<label index="tx_cgswigmore_publication.section">Section</label>
+			<label index="tx_cgswigmore_publication.file">File</label>
+			<label index="tx_cgswigmore_jobcategory">Job category</label>
+			<label index="tx_cgswigmore_jobcategory.name">Name</label>
+			<label index="tx_cgswigmore_jobs">Jobs</label>
+			<label index="tx_cgswigmore_jobs.title">Title</label>
+			<label index="tx_cgswigmore_jobs.categories">Categories</label>
+			<label index="tx_cgswigmore_jobs.text">Text</label>
+			<label index="tx_cgswigmore_jobs.contact">Contact person</label>
+			<label index="tx_cgswigmore_jobs.file">File</label>
+			<label index="tx_cgswigmore_files">Files</label>
+			<label index="tx_cgswigmore_files.file">File</label>
+			<label index="tx_cgswigmore_files.description">Description</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tt_content.list_type_pi1">Firmenverwaltung</label>
+			<label index="tx_cgswigmore_location">Standort</label>
+			<label index="tx_cgswigmore_location.title">Standort</label>
+			<label index="tx_cgswigmore_location.address">Adresse</label>
+			<label index="tx_cgswigmore_location.zip">ZIP</label>
+			<label index="tx_cgswigmore_location.city">Stadt</label>
+			<label index="tx_cgswigmore_location.country">Land</label>
+			<label index="tx_cgswigmore_location.mail">E-Mail</label>
+			<label index="tx_cgswigmore_location.phone">Telefon</label>
+			<label index="tx_cgswigmore_location.fax">Fax</label>
+			<label index="tx_cgswigmore_location.description">Beschreibung</label>
+			<label index="tx_cgswigmore_location.file">Bild</label>
+			<label index="tx_cgswigmore_section">Abteilung</label>
+			<label index="tx_cgswigmore_section.section">Abteilung</label>
+			<label index="tx_cgswigmore_section.title">Titel</label>
+			<label index="tx_cgswigmore_section.photo">Gruppenfoto</label>
+			<label index="tx_cgswigmore_section.description">Beschreibunt</label>
+			<label index="tx_cgswigmore_section.leader1">Leiter</label>
+			<label index="tx_cgswigmore_section.leader2">Weitere Leiter</label>
+			<label index="tx_cgswigmore_section.files">Dateien</label>
+			<label index="tx_cgswigmore_staff">Mitarbeiter</label>
+			<label index="tx_cgswigmore_staff.title">Titel</label>
+			<label index="tx_cgswigmore_staff.name">Name</label>
+			<label index="tx_cgswigmore_staff.firstname">Vorname</label>
+			<label index="tx_cgswigmore_staff.section">Abteilung</label>
+			<label index="tx_cgswigmore_staff.description">Beschreibung</label>
+			<label index="tx_cgswigmore_staff.phone">Telefon</label>
+			<label index="tx_cgswigmore_staff.mobile">Mobiltelefon</label>
+			<label index="tx_cgswigmore_staff.fax">Fax</label>
+			<label index="tx_cgswigmore_staff.mail">E-Mail</label>
+			<label index="tx_cgswigmore_staff.image">Photo</label>
+			<label index="tx_cgswigmore_publication">Publikationen</label>
+			<label index="tx_cgswigmore_publication.author">Autoren</label>
+			<label index="tx_cgswigmore_publication.title">Titel</label>
+			<label index="tx_cgswigmore_publication.journal">Journal</label>
+			<label index="tx_cgswigmore_publication.date">Datum</label>
+			<label index="tx_cgswigmore_publication.volume">Volume</label>
+			<label index="tx_cgswigmore_publication.number">Nummer</label>
+			<label index="tx_cgswigmore_publication.pages">Seiten</label>
+			<label index="tx_cgswigmore_publication.note">Notiz</label>
+			<label index="tx_cgswigmore_publication.pmid">Pubmed-ID (PMID)</label>
+			<label index="tx_cgswigmore_publication.staff">Mitarbeiter</label>
+			<label index="tx_cgswigmore_publication.section">Abteilung</label>
+			<label index="tx_cgswigmore_publication.file">Datei</label>
+			<label index="tx_cgswigmore_jobcategory">Job Kategorie</label>
+			<label index="tx_cgswigmore_jobcategory.name">Name</label>
+			<label index="tx_cgswigmore_jobs">Jobs</label>
+			<label index="tx_cgswigmore_jobs.title">Titel</label>
+			<label index="tx_cgswigmore_jobs.categories">Kategorien</label>
+			<label index="tx_cgswigmore_jobs.text">Text</label>
+			<label index="tx_cgswigmore_jobs.contact">Kontaktperson</label>
+			<label index="tx_cgswigmore_jobs.file">Datei:</label>
+			<label index="tx_cgswigmore_files">Dateien</label>
+			<label index="tx_cgswigmore_files.file">Datei</label>
+			<label index="tx_cgswigmore_files.description">Beschreibung</label>
+		</languageKey>
+	</data>
+</T3locallang>

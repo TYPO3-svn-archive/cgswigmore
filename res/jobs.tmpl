@@ -1,0 +1,105 @@
+Template markers:
+TEMPLATE
+JOBCATEGORY_ROW_AIO
+JOBCATEGORY_CJSINGLE
+JOBCATEGORY_CJS_LIST
+JOBCATEGORY_CJS_LIST_ROW
+JOBCATEGORY_LIST
+JOB_ROW
+JOB_CONTACT
+JOB_CONTACT_ROW
+
+Text markers:
+###JOB_GLOBAL_TITLE###
+###JOB_GLOBAL_TEXT###
+###JOBCATEGORY_TITLE###
+###JOB_TITLE_SINGLE_LINK###
+###JOB_TITLE###
+###JOB_TEXT###
+###STAF_TITLE### 
+###STAF_FIRSTNAME### 
+###STAF_SURNAME###
+###STAF_MAIL###
+
+<!-- ###TEMPLATE### begin -->
+	<div class="tx-cgswigmore-pi1-DIV-box">
+		<h1>
+			###JOB_GLOBAL_TITLE###
+		</h1>
+		
+		###JOB_GLOBAL_TEXT###
+	</div>
+	
+	<!-- ###JOBCATEGORY_CJS_LIST### begin -->
+		<div class="tx-cgswigmore-pi1-DIV-box">
+			<!-- ###JOBCATEGORY_CJS_LIST_ROW### begin -->
+				<div class="tx-cgswigmore-pi1-DIV-box-jc-list">
+					<h2>###JOBCATEGORY_TITLE###</h2>
+	
+					<!-- ###JOBCATEGORY_LIST### begin -->
+						<ul>
+							<!-- ###JOB_ROW### begin -->
+								<li class="tx-cgswigmore-pi1-LI-bullet">
+									<h1 class="tx-cgswigmore-pi1-h1-jobtitle">
+										###JOB_TITLE_SINGLE_LINK###
+									</h1>
+								</li>
+							<!-- ###JOB_ROW### end -->
+						</ul>
+					<!-- ###JOBCATEGORY_LIST### begin -->
+				</div>
+			<!-- ###JOBCATEGORY_CJS_LIST_ROW### begin -->
+		</div>
+	<!-- ###JOBCATEGORY_CJS_LIST### end -->
+
+	<!-- ###JOBCATEGORY_CJSINGLE### begin -->
+		<!-- ###JOB_ROW### begin -->
+			<div class="tx-cgswigmore-pi1-DIV-box">
+				<h1 class="tx-cgswigmore-pi1-h1-jobtitle">
+					###JOB_ITEM_FILE###
+					###JOB_TITLE###
+				</h1>
+				###JOB_TEXT###
+				<br />
+				<!-- ###JOB_CONTACT### begin -->
+					<b>###JOB_CONTACT_TITLE###</b>
+					<br />
+					<!-- ###JOB_CONTACT_ROW### begin -->
+						###STAF_TITLE### ###STAF_FIRSTNAME### <b>###STAF_SURNAME###</b> ###STAF_MAIL### <br />
+					<!-- ###JOB_CONTACT_ROW### end -->
+				<!-- ###JOB_CONTACT### end -->
+			</div>
+		<!-- ###JOB_ROW### end -->
+	<!-- ###JOBCATEGORY_CJSINGLE### end -->
+
+	<!-- ###JOBCATEGORY_ROW_AIO### begin -->
+		<div class="tx-cgswigmore-pi1-DIV-box">
+			<h2>
+				###JOBCATEGORY_TITLE###
+			</h2>
+	
+			<!-- ###JOBCATEGORY_LIST### begin -->		
+			<ul>
+				<!-- ###JOB_ROW### begin -->
+					<li class="tx-cgswigmore-pi1-LI-bullet">
+						<h1 class="tx-cgswigmore-pi1-h1-jobtitle">
+							###JOB_ITEM_FILE###
+							###JOB_TITLE###
+						</h1>
+						###JOB_TEXT###
+						<br />
+						<!-- ###JOB_CONTACT### begin -->
+							<b>###JOB_CONTACT_TITLE###</b>
+							<br />
+							<!-- ###JOB_CONTACT_ROW### begin -->
+								###STAF_TITLE### ###STAF_FIRSTNAME### <b>###STAF_SURNAME###</b> ###STAF_MAIL### <br />
+							<!-- ###JOB_CONTACT_ROW### end -->
+						<!-- ###JOB_CONTACT### end -->
+					</li>
+				<!-- ###JOB_ROW### end -->
+			</ul>
+			<!-- ###JOBCATEGORY_LIST### end -->
+		</div>
+	<!-- ###JOBCATEGORY_ROW_AIO### end -->
+<!-- ###TEMPLATE### end -->
+

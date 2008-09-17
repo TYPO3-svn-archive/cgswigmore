@@ -1,0 +1,63 @@
+29-08-2008 Christoph Gostner <christoph.gostner@gmail.com>
+	* Version 0.5.1
+	* bugfix: sysfolder selection 
+	* new property for the staff (.section.doNotLink)
+
+17-07-2008 Christoph Gostner <christoph.gostner@gmail.com>
+	* Version 0.5.0
+	* first beta version
+	* corrected some errors in the documentation.
+	* renamed a lot of configuration values, plural vs. singular => be
+	  patient when updating to this version
+	* selection of staff, publications, location, sections, ... now
+	  depends on the page's record store or, when set, the 	recordIds.
+	* removed the sectionUID and the onlyUIDs option from the section's
+	  configuration, this now can be implemented 	using different
+	  SysFolders and the recordIds option.
+
+
+17-07-2008 Christoph Gostner <christoph.gostner@gmail.com>
+	* Version 0.4.1
+	* Not real a bug fix release but correct a stupid design - enable 
+	  the SysFolder dependence as default.
+
+17-07-2008 Christoph Gostner <christoph.gostner@gmail.com>
+	* Version 0.4.0
+	* added a optional dependence to a SysFolder to the STAFF's option
+	  that can be enabled via TypoScript.
+	* Added a new marker to the staff's list view. Now the section's names
+	  behind a person can be linked to the section's page, simply replace
+	  set the correct marker.
+	* Documentation refreshed
+
+12-07-2008 Christoph Gostner  <christoph.gostner@gmail.com>
+	* Version 0.3.0
+	* added a file item to the job
+
+12-07-2008 Christoph Gostner  <christoph.gostner@gmail.com>
+	* Version 0.2.0
+	* added the userFunc possibilty for the publications
+	* added a file item to the publications that can be linked and/or
+	  added to the publication
+	* added an iconset, thanks to roy scholten (http://www.yoroy.com/)
+	* added a switcher for the job view to view the full list of
+	   categories/jobs or the only the job-titles linked to the detail
+	   view
+
+??-??-?? Christoph Gostner  <christoph.gostner@gmail.com>
+	* Version 0.1.5
+	* fixed a problem with in the location
+
+08-06-20 Christoph Gostner  <christoph.gostner@gmail.com>
+	* Version 0.1.4
+	* Finally added the location to display location's information about
+	  your institute
+	* Fixed an error caused by the archived staff members, when the staff
+	  member's section was set offline, 
+	  the staff member shouldn't be displayed in the archived staff members 
+	  list.
+
+* 0.1.2: Bug-Fix release (sql injections)
+* 0.1.1: small changes, first version of documentation completed.
+* 0.1.0: initial upload, working, but a lot todo
+

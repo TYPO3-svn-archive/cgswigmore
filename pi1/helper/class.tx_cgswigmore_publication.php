@@ -82,7 +82,6 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 			}
 		} else { /* AIO */
 			$rowRes = $this->getDbResult($this->conf['sort'], $select);
-			#t3lib_div::debug($GLOBALS['TYPO3_DB']->sql_num_rows($rowRes));
 			$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = $this->fillPublicationTemplate($rowRes, $template['item1']);
 			$subpartArray['###TEMPLATE_VIEW_LPY###'] = '';
 		}
@@ -168,15 +167,15 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	private function fillRow($row, $template) {
 		$markerArray = $this->getMarker($row);
 
-		$index = 1;
-		if (isset($this->conf['link']) && $this->conf['link'])
 		$index = 0;
+		if (isset($this->conf['link']) && !$this->conf['link'])
+			$index = 1;
 
 		$subPartNames = array('###TEMPLATE_PUBLICATION_ROW_WITH_LINKS###', '###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS###');
 		$subTemplate = $this->cObj->getSubpart($template, $subPartNames[$index]);
 
 		$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = '';
-		if ($this->conf['link'] && $this->conf['icon']) {
+		if (isset($this->conf['icon']) && $this->conf['icon']) {
 			$iMarkerArray['###PUBLICATION_FILE_ICON###'] = $this->getFileLink($row);
 			$iSubTemplate = $this->cObj->getSubpart($subTemplate, '###TEMPLATE_PUBLICATION_ROW_FILE_ICON###');
 			$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = $this->cObj->substituteMarkerArrayCached($iSubTemplate, $iMarkerArray);

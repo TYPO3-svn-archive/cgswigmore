@@ -62,11 +62,10 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 
 		if (!is_null($uid) && $uid > 0) {
 			$this->masterTemplateMarker = '###TEMPLATE_DETAIL###';
-			#$this->addToSelect('where', 'tx_cgswigmore_staff.uid = ' . $uid);
 			$select['where'][] = 'tx_cgswigmore_staff.uid = ' . $uid;
 			$res = $this->getDbResult($this->conf['sort'], $select);
 		} else {
-			$res = $this->getDbResult($this->conf['sort']);
+			$res = $this->getDbResult($this->conf['sort'], $select);
 		}
 
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_STAFF_ROW###'));
@@ -106,7 +105,6 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 	}
 	
 	private function fillRowSubpartPublicationTemplate($template, $uid) {
-		$sTemplate = $this->cObj->getSubpart($template, '###TEMPLATE_STAFF_PUBLICATION###');
 		$publicationUidArr = self::getUserPublicationUids($uid);
 		
 		$publ = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_publication');
@@ -144,10 +142,15 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 			$l = $row['name'];
 			$fl = sprintf($this->conf['link.']['sprintf'], $f, $l);
 			$lf = sprintf($this->conf['link.']['sprintf'], $l, $f);
+
 			$markerArray['###STAFF_SPRINTF_FIRSTNAME_NAME###'] = $fl;
 			$markerArray['###STAFF_SPRINTF_NAME_FIRSTNAME###'] = $lf;
 			
 			$typos['parameter'] = $this->tx_reference->pi_linkTP_keepPIvars_url(array('sta_uid' => $row['uid']), 0, 0, $this->conf['staffUID']); /* TODO: rename sta_uid */
+			
+			$markerArray['###STAFF_LINK_SPRINTF_FIRSTNAME###'] = $this->cObj->typolink($f, $typos);
+			$markerArray['###STAFF_LINK_SPRINTF_NAME###'] = $this->cObj->typolink($l, $typos);
+			
 			$markerArray['###STAFF_LINK_SPRINTF_FIRSTNAME_NAME###'] = $this->cObj->typolink($fl, $typos);
 			$markerArray['###STAFF_LINK_SPRINTF_NAME_FIRSTNAME###'] = $this->cObj->typolink($lf, $typos); 
 		}
@@ -201,7 +204,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 	
 	private function getStaffSectionMarker($uid) {
 		/* get all connections to sections for this member */
-		$select['select'][] = 'tx_cgswigmore_staff_section_mm.uid_foreign';
+		$select['select'][] = 'tx_cgswigmore_staff_section_mm.uid_foreign'; /* TODO: move to abstract parent class */
 		$select['table'][] = 'tx_cgswigmore_staff_section_mm';
 		$select['where'][] = 'tx_cgswigmore_staff_section_mm.uid_local = ' . $uid;
 		$res = self::getSelectDbRes($select);
@@ -225,6 +228,17 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$markerArray['###STAFF_SWITCH_CA_VIEW_CURRENT_LINK###'] = $this->cObj->typolink($this->tx_reference->pi_getLL('tx_cgswigmore_pi1_section_staff_link_current'), $typos);
 		
 		return $markerArray;
+	}
+	
+	public function getNameLink($uid) {
+		$res = $this->getDbResult(NULL, array('where' => array('tx_cgswigmore_staff.uid = ' . $uid)));
+		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 1) {
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+			$markerArray = $this->getMarker($row);
+			
+			return $markerArray['###STAFF_LINK_SPRINTF_NAME###'];
+		}
+		return NULL;
 	}
 }
 

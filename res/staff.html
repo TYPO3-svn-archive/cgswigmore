@@ -79,133 +79,16 @@
 	<!-- ###TEMPLATE_STAFF_ROW### end -->
 ###TEMPLATE_DETAIL###
 
-
-
-Template markers:
-TEMPLATE
-STAF_SUBPART_WITH_LINKS
-STAF_ROW
-STAF_SUBPART_WITHOUT_LINKS
-STAF_ROW
-TEMPLATEDETAIL
-STAFF_PHONE_ITEM
-STAFF_MOBILE_ITEM
-STAFF_FAX_ITEM
-STAFF_MAIL_ITEM
-STAF_PUBLICATIONS
-PUBL_ITEM_ROW
-PUBL_ITEM_WITH_PUBMED_LINK
-PUBL_ITEM_WITHOUT_PUBMED_LINK
-
-
-Text markers:
-###STAF_TITLE###
-###STAF_FIRSTNAME###
-####STAF_SURNAME###
-###STAF_PERSON_LINK###
-###STAF_LINKED_SECTIONS###
-###STAF_FIRSTNAME###
-###STAF_SURNAME###
-###STAF_SECTIONS###
-
-###STAF_IMAGE###
-###STAF_PHONE###
-###STAF_MOBILE###
-###STAF_FAX###
-###STAF_MAIL###
-###STAF_DESCRIPTION###
-
-For the publication's markers please see:
-- publications.tmp
-
-<!-- ###TEMPLATEx### begin -->	
-	<div class="tx-cgswigmore-pi1-DIV-box">
-		<h1>
-			###STAF_TITLE###
-		</h1>
+###TEMPLATE_SECTION###
+	<h1>
+		###TEMPLATE_STAFF_PAGE_TITLE###
+	</h1>
 	
-		<!-- ###STAF_SUBPART_WITH_LINKS### begin -->
-		<ul>
-			<!-- ###STAF_ROW### begin -->
-				<li class="tx-cgswigmore-pi1-LI-person">
-					<a href="###STAF_PERSON_LINK###">
-						###STAF_FIRSTNAME### <b>###STAF_SURNAME###</b>
-					</a> 
-					(###STAF_LINKED_SECTIONS###)
-				</li>
-			<!-- ###STAF_ROW### end -->
-		</ul>
-		<!-- ###STAF_SUBPART_WITH_LINKS### end -->
-		
-		<!-- ###STAF_SUBPART_WITHOUT_LINKS### begin -->
-		<ul>
-			<!-- ###STAF_ROW### begin -->
-				<li class="tx-cgswigmore-pi1-LI-person">
-					###STAF_FIRSTNAME### <b>###STAF_SURNAME###</b> (###STAF_SECTIONS###)
-				</li>
-			<!-- ###STAF_ROW### end -->
-		</ul>
-		<!-- ###STAF_SUBPART_WITHOUT_LINKS### end -->
-		<br />
-		&raquo; <a class="tx-cgswigmore-pi1-A-pn" href="###STAF_PREV_NEXT_LINK###">###STAF_PREV_NEXT_LINK_TEXT###</a>
-	</div>
-<!-- ###TEMPLATEx### end -->
-
-<!-- ###TEMPLATEDETAIL### begin -->
-	<div class="tx-cgswigmore-pi1-DIV-box">
-		<h1 class="tx-cgswigmore-pi1-H1-title">
-			###STAF_TITLE### ###STAF_FIRSTNAME### ###STAF_SURNAME###
-		</h1>
-		
-		###STAF_IMAGE###
-		
-		<ul class="tx-cgswigmore-pi1-UL-detail">
-			<!-- ###STAFF_PHONE_ITEM### begin -->
-				<li class="tx-cgswigmore-pi1-LI-phone">###STAF_PHONE###</li>
-			<!-- ###STAFF_PHONE_ITEM### end -->
-
-			<!-- ###STAFF_MOBILE_ITEM### begin -->
-				<li class="tx-cgswigmore-pi1-LI-mobile">###STAF_MOBILE###</li>
-			<!-- ###STAFF_MOBILE_ITEM### end -->
-			
-			<!-- ###STAFF_FAX_ITEM### begin -->
-				<li class="tx-cgswigmore-pi1-LI-fax">###STAF_FAX###</li>
-			<!-- ###STAFF_FAX_ITEM### end -->
-			
-			<!-- ###STAFF_MAIL_ITEM### begin -->
-				<li class="tx-cgswigmore-pi1-LI-mail">###STAF_MAIL###</li>
-			<!-- ###STAFF_MAIL_ITEM### end -->
-		</ul>
-		<br />
-		<p class="tx-cgswigmore-pi1-P-description">
-			###STAF_DESCRIPTION###
-		</p>
-	</div>
-	
-	<!-- ###STAF_PUBLICATIONS### begin -->
-		<div class="tx-cgswigmore-pi1-DIV-box">
-			<h2>###PUBL_TITLE###</h2>
-
-			<!-- ###PUBL_ITEM_ROW### begin -->
-				<p class="tx-cgswigmore-pi1-P-pubitem">
-					<!-- ###PUBL_ITEM_WITH_PUBMED_LINK### begin -->
-						<a href="###PUBMED_LINK###" target="_blank">
-							###PUBL_NAME###
-						</a>
-					<!-- ###PUBL_ITEM_WITH_PUBMED_LINK### end -->
-					
-					<!-- ###PUBL_ITEM_WITHOUT_PUBMED_LINK### begin -->
-						###PUBL_NAME###
-					<!-- ###PUBL_ITEM_WITHOUT_PUBMED_LINK### end -->
-				</p>
-				<p class="tx-cgswigmore-pi1-P-author">
-					###PUBL_AUTHORS###
-				</p>
-				<p class="tx-cgswigmore-pi1-P-journal">
-					###PUBL_JOURNAL### ###PUBL_DATE###; ###PUBL_VOLUME###(###PUBL_NUMBER###)###PUBL_PAGES###. ###PUBL_NOTE###
-				</p>
-			<!-- ###PUBL_ITEM_ROW### end -->
-		</div>
-	<!-- ###STAF_PUBLICATIONS### end -->
-	
-<!-- ###TEMPLATEDETAIL### end -->
+	<ul>
+		<!-- ###TEMPLATE_STAFF_ROW### start -->
+			<li class="tx-cgswigmore-pi1-LI-person">
+				###STAFF_LINK_SPRINTF_FIRSTNAME_NAME###
+			</li>
+		<!-- ###TEMPLATE_STAFF_ROW### end -->
+	</ul>
+###TEMPLATE_SECTION###

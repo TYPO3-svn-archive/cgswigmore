@@ -10,6 +10,11 @@
 			<label index='tx_cgswigmore_pi1_staff_title'>Staff</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_previous'>previous members</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_current'>current members</label>
+			<label index='tx_cgswigmore_pi1_section_home'>Home</label>
+			<label index='tx_cgswigmore_pi1_section_staff'>Staff</label>
+			<label index='tx_cgswigmore_pi1_section_publications'>Publications</label>
+			
+			
 
 		
 			<label index='tx_cgswigmore_pi1_template_not_found'>Error: the template-file was not found.</label>
@@ -26,10 +31,8 @@
 			
 			
 			
-			<label index='tx_cgswigmore_pi1_section_home'>Home</label>
-			<label index='tx_cgswigmore_pi1_section_staff'>Staff</label>
-
-			<label index='tx_cgswigmore_pi1_section_publications'>Publications</label>
+			
+			
 			<label index='tx_cgswigmore_pi1_section_file_title'>Files:</label>
 			<label index='tx_cgswigmore_pi1_invalid_numer_of_rows'>Error: invalid number of rows  in result set.</label>
 			<label index='tx_cgswigmore_pi1_jobs_page_title'>open positions at the tcri</label>
@@ -43,7 +46,11 @@
 			<label index='tx_cgswigmore_pi1_staff_title'>Mitarbeiter</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_previous'>ehemalige Mitarbeiter</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_current'>derzeitige Mitarbeiter</label>
-		
+			<label index='tx_cgswigmore_pi1_section_home'>Home</label>
+			<label index='tx_cgswigmore_pi1_section_staff'>Mitarbeiter</label>
+			<label index='tx_cgswigmore_pi1_section_publications'>Publikationen</label>
+
+
 		
 			<label index='tx_cgswigmore_pi1_template_not_found'>Fehler: Die Template-Datei wurde nicht gefunden.</label>
 			<label index='tx_cgswigmore_pi1_location_page_title'>Standort</label>
@@ -57,10 +64,7 @@
 			
 			
 			
-			<label index='tx_cgswigmore_pi1_section_home'>Home</label>
-			<label index='tx_cgswigmore_pi1_section_staff'>Mitarbeiter</label>
 
-			<label index='tx_cgswigmore_pi1_section_publications'>Publikationen</label>
 			<label index='tx_cgswigmore_pi1_section_file_title'>Dateien:</label>
 			<label index='tx_cgswigmore_pi1_invalid_numer_of_rows'>Fehler: Ungültige Anzahl von Datensätzen im Ergebnis.</label>
 			<label index='tx_cgswigmore_pi1_jobs_page_title'>Stellenangebote</label>

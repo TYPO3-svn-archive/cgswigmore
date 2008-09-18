@@ -33,10 +33,12 @@ abstract class tx_cgswigmore_helper_base {
 
 	const STAFF_SELECT_CURRENT = 0;
 	const STAFF_SELECT_ARCHIVED = 1;
+	
+	const SECTION_SELECT_HOME = 2;
+	const SECTION_SELECT_STAFF = 3;
+	const SECTION_SELECT_PUBLICATION = 4;
 
 	protected $masterTemplateMarker;
-
-	/*protected $select;*/
 	
 	protected $tableKeys;
 
@@ -48,7 +50,6 @@ abstract class tx_cgswigmore_helper_base {
 
 	public function __construct() {
 		$this->masterTemplateMarker = '###TEMPLATE###';
-		/*$this->select = array();*/
 		$this->tableKeys = array();
 	}
 	
@@ -355,6 +356,38 @@ abstract class tx_cgswigmore_helper_base {
 		$select['where'][] = 'tx_cgswigmore_publication_staff_mm.uid_foreign = ' . $uid;
 		$res = self::getSelectDbRes($select);
 
+		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0)
+			return array(0);
+		
+		$publicationUidArr = array();
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			$publicationUidArr[] = $row['uid_local'];
+		}
+		return $publicationUidArr;
+	}
+	
+	protected static function getSectionStaffUids($uid) {
+		$select['select'][] = 'tx_cgswigmore_staff_section_mm.*';
+		$select['table'][] = 'tx_cgswigmore_staff_section_mm';
+		$select['where'][] = 'tx_cgswigmore_staff_section_mm.uid_foreign = ' . $uid;  
+		$res = self::getSelectDbRes($select);
+		
+		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0)
+			return array(0);
+
+		$staffUidArr = array();
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			$staffUidArr[] = $row['uid_local'];
+		}
+		return $staffUidArr;
+	}
+	
+	protected static function getSectionPublicationUid($uid) {
+		$select['select'][] = 'tx_cgswigmore_publication_section_mm.*';
+		$select['table'][] = 'tx_cgswigmore_publication_section_mm';
+		$select['where'][] = 'tx_cgswigmore_publication_section_mm.uid_foreign = ' . $uid;
+		$res = self::getSelectDbRes($select);
+		
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0)
 			return array(0);
 		

@@ -73,22 +73,21 @@ class tx_cgswigmore_pi1 extends tslib_pibase {
 
 		switch ($conf['display']) {
 			case 'PUBLICATION':
-				#$this->displayPublications($conf['publication.']);
 				$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_publication');
 				$content .= $cgswigmoreObj->init();
 				break;
 			case 'STAFF':
-				#$content .= $this->displayStaff($conf['staff.']);
 				$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_staff');
 				$content .= $cgswigmoreObj->init();
 				break;
 			case 'JOB':
 				$content .= $this->displayJobs($conf['job.']);
+				#$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_job');
+				#$content .= $cgswigmoreObj->init();
 				break;
 			case 'SECTION':
-				$content .= $this->displaySections($conf['section.']);
-				#$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_section');
-				#$content .= $cgswigmoreObj->init();
+				$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_section');
+				$content .= $cgswigmoreObj->init();
 				break;
 			case 'LOCATION':
 				$content .= $this->displayLocation($conf['location.']);
@@ -760,7 +759,7 @@ class tx_cgswigmore_pi1 extends tslib_pibase {
 		$select['where'][] = implode(' OR ', $p_uid);
 		$select['sort'] = $this->getConfValue($localConf, 'sort');
 		
-		$res = $this->getSelectDbRes($select, true);
+		$res = $this->getSelectDbRes($select);
 
 		$marks['###PUBL_TITLE###'] = $this->pi_getLL('tx_cgswigmore_pi1_publication_title'); 
 		

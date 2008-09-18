@@ -39,18 +39,34 @@ class tx_cgswigmore_factory {
 	
 	private static $reference;
 
+	/**
+	 * Prevent instances of tx_cgswigmore_factory
+	 */
 	private function __construct() {
 		
 	}
 	
+	/**
+	 * Set the reference to the tx_cgswigmore_pi1 class. We need this
+	 * before we can call tx_cgswigmore_factory::getInstance(), because
+	 * there we initialise the class with the reference and the complete
+	 * configuration of extension.
+	 * 
+	 * @param	tx_cgswigmore_pi1	$reference: The reference to tx_cgswigmore_pi1
+	 */
 	public static function setExtBaseClassRef($reference) {
 		self::$reference = $reference;
 	}
 	
+	/**
+	 * Make an instance of the class, set some values and
+	 * return the object to the caller.
+	 * 
+	 * @param	string	$className: The name of the class we want an instance of
+	 * @return	tx_cgswigmore_helper_base	A class that implements this abstract class
+	 */
 	public static function getInstance($className) {
 		$obj = &t3lib_div::makeInstance($className);
-		
-		#t3lib_div::debug(self::$reference->conf);
 		
 		$obj->setConf(self::$reference->conf);
 		$obj->setTxReference(self::$reference);

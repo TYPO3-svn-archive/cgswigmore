@@ -32,13 +32,42 @@ require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmor
  * @subpackage	tx_cgswigmore
  */
 class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
+	
+	public function __construct() {
+		parent::__construct();
+		
+		$this->tableKeys = array(
+			'uid',
+			'pid',
+			'text',
+			'title',
+		);
+	}
 
 	protected function fillTemplate($select = array()) {
+		$res = $this->getDbResult($this->conf['category.']['sort']);
+	}
+	
+	private function fillJobTemplate($res, $template) {
 		
 	}
 	
-	protected function getMarker($row) {
+	private function getDbResult($sort, $select = array()) {
+		$idArr = $this->getStorageIds();
+		$select['select'][] = 'tx_cgswigmore_jobcategory.*';
+		$select['table'][] = 'tx_cgswigmore_jobcategory';
+		$select['where'][] = $this->getWhereAdd('tx_cgswigmore_jobcategory');
+		$select['where'][] = $this->tx_reference->getLangQueryPart('tx_cgswigmore_jobcategory');
+		$select['where'][] = 'tx_cgswigmore_jobcategory.pid IN ('.implode(',', $idArr).')';
+		$select['sort'] = $sort;
 		
+		$res = $this->getSelectDbRes($select);
+	}
+	
+	protected function getMarker($row) {
+		$markerArray = $this->getMarkerFromArr($row);
+		
+		return $markerArray;
 	}
 }
 

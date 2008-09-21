@@ -37,10 +37,17 @@ require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmor
  */
 class tx_cgswigmore_factory {
 	
+	/**
+	 * Hold a reference to the tx_cgswigmore_pi1 class
+	 * 
+	 * @var tx_cgswigmore_pi1
+	 */
 	private static $reference;
 
 	/**
 	 * Prevent instances of tx_cgswigmore_factory
+	 * 
+	 * @author Christoph Gostner
 	 */
 	private function __construct() {
 		
@@ -52,7 +59,8 @@ class tx_cgswigmore_factory {
 	 * there we initialise the class with the reference and the complete
 	 * configuration of extension.
 	 * 
-	 * @param	tx_cgswigmore_pi1	$reference: The reference to tx_cgswigmore_pi1
+	 * @param tx_cgswigmore_pi1 $reference The reference to tx_cgswigmore_pi1
+	 * @author Christoph Gostner
 	 */
 	public static function setExtBaseClassRef($reference) {
 		self::$reference = $reference;
@@ -62,8 +70,9 @@ class tx_cgswigmore_factory {
 	 * Make an instance of the class, set some values and
 	 * return the object to the caller.
 	 * 
-	 * @param	string	$className: The name of the class we want an instance of
-	 * @return	tx_cgswigmore_helper_base	A class that implements this abstract class
+	 * @param string $className The name of the class we want an instance of
+	 * @return tx_cgswigmore_helper_base A class that implements this abstract class
+	 * @author Christoph Gostner
 	 */
 	public static function getInstance($className) {
 		$obj = &t3lib_div::makeInstance($className);

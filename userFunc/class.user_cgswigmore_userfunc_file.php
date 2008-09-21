@@ -32,7 +32,7 @@
 class user_cgswigmore_userfunc_file {
 	
 	function linkFile(&$row, &$ref) {
-		$uploadPath = $ref->tx_upload_dir;
+		$uploadPath = $ref->getUploadDir();
 		$fullPath = $uploadPath . $row['file'];
 		
 		if (is_file($fullPath)) 

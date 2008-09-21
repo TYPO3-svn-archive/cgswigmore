@@ -7,18 +7,22 @@
 	<data type='array'>
 		<languageKey index='default' type='array'>
 			<label index='tx_cgswigmore_pi1_publication_title'>list of publications</label>
+			<label index='tx_cgswigmore_pi1_publication_update'>Update</label>
 			<label index='tx_cgswigmore_pi1_staff_title'>Staff</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_previous'>previous members</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_current'>current members</label>
 			<label index='tx_cgswigmore_pi1_section_home'>Home</label>
 			<label index='tx_cgswigmore_pi1_section_staff'>Staff</label>
 			<label index='tx_cgswigmore_pi1_section_publications'>Publications</label>
-			
-			
+			<label index='tx_cgswigmore_pi1_location_page_title'>Location</label>
+			<label index='tx_cgswigmore_pi1_jobs_page_title'>open positions at the tcri</label>
+			<label index='tx_cgswigmore_pi1_jobs_page_text'>open positions on our division. your are welcome to inquire about future possibilities by e-mail.</label>
+			<label index='tx_cgswigmore_pi1_job_contact'>Contact:</label>
+			<label index='tx_cgswigmore_pi1_template_not_found'>Error: the template-file was not found.</label>
 
 		
-			<label index='tx_cgswigmore_pi1_template_not_found'>Error: the template-file was not found.</label>
-			<label index='tx_cgswigmore_pi1_location_page_title'>Location</label>
+			
+			
 			<label index='tx_cgswigmore_pi1_nothing_to_do'>Nothing to do for me.</label>
 			<label index='tx_cgswigmore_pi1_no_staff_members'>It seems that the sections hasn't any members.</label>
 			<label index='tx_cgswigmore_pi1_section_no_row_found'>No sections found.</label>
@@ -35,25 +39,29 @@
 			
 			<label index='tx_cgswigmore_pi1_section_file_title'>Files:</label>
 			<label index='tx_cgswigmore_pi1_invalid_numer_of_rows'>Error: invalid number of rows  in result set.</label>
-			<label index='tx_cgswigmore_pi1_jobs_page_title'>open positions at the tcri</label>
-			<label index='tx_cgswigmore_pi1_jobs_text'>open positions on our division. your are welcome to inquire about future possibilities by e-mail.</label>
-			<label index='tx_cgswigmore_pi1_job_contact'>Contact:</label>
+			
 			<label index='tx_cgswigmore_pi1_job_no_contact_found'>No contact found.</label>
 			<label index='tx_cgswigmore_pi1_no_view_set'>No view set.</label>
 		</languageKey>
 		<languageKey index='de' type='array'>
 			<label index='tx_cgswigmore_pi1_publication_title'>Publikationsliste</label>
+			<label index='tx_cgswigmore_pi1_publication_update'>Update</label>
 			<label index='tx_cgswigmore_pi1_staff_title'>Mitarbeiter</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_previous'>ehemalige Mitarbeiter</label>
 			<label index='tx_cgswigmore_pi1_section_staff_link_current'>derzeitige Mitarbeiter</label>
 			<label index='tx_cgswigmore_pi1_section_home'>Home</label>
 			<label index='tx_cgswigmore_pi1_section_staff'>Mitarbeiter</label>
 			<label index='tx_cgswigmore_pi1_section_publications'>Publikationen</label>
+			<label index='tx_cgswigmore_pi1_location_page_title'>Standort</label>
+			<label index='tx_cgswigmore_pi1_jobs_page_title'>Stellenangebote</label>
+			<label index='tx_cgswigmore_pi1_jobs_page_text'>offene Stellen an unsererm Institut.</label>
+			<label index='tx_cgswigmore_pi1_job_contact'>Kontakt:</label>
+			<label index='tx_cgswigmore_pi1_template_not_found'>Fehler: Die Template-Datei wurde nicht gefunden.</label>
 
 
 		
-			<label index='tx_cgswigmore_pi1_template_not_found'>Fehler: Die Template-Datei wurde nicht gefunden.</label>
-			<label index='tx_cgswigmore_pi1_location_page_title'>Standort</label>
+			
+			
 			<label index='tx_cgswigmore_pi1_nothing_to_do'>Ich habe nichts zu tun.</label>
 			<label index='tx_cgswigmore_pi1_no_staff_members'>Es scheint, dass die Abteilung keine Mitarbeiter hat.</label>
 			<label index='tx_cgswigmore_pi1_section_no_row_found'>Es wurde keine Abteilung gefunden.</label>
@@ -67,9 +75,8 @@
 
 			<label index='tx_cgswigmore_pi1_section_file_title'>Dateien:</label>
 			<label index='tx_cgswigmore_pi1_invalid_numer_of_rows'>Fehler: Ungültige Anzahl von Datensätzen im Ergebnis.</label>
-			<label index='tx_cgswigmore_pi1_jobs_page_title'>Stellenangebote</label>
-			<label index='tx_cgswigmore_pi1_jobs_text'>offene Stellen an unsererm Institut.</label>
-			<label index='tx_cgswigmore_pi1_job_contact'>Kontakt:</label>
+			
+			
 			<label index='tx_cgswigmore_pi1_job_no_contact_found'>Kein Kontakt gefunden.</label>
 			<label index='tx_cgswigmore_pi1_no_view_set'>View ist nicht gesetzt.</label>
 		</languageKey>

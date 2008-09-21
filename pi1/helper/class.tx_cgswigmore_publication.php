@@ -22,7 +22,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmore_helper_base.php');
+require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/util/class.tx_cgswigmore_helper_base.php');
 
 /**
  * Plugin 'Company managment tool' for the 'cgswigmore' extension.
@@ -33,6 +33,15 @@ require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmor
  */
 class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 
+	/**
+	 * Constructor.
+	 * This constructor set's the automatic generated template marker keys for the a publication.
+	 * Additional markers are defined in tx_cgswigmore_publication->getMarker(...)
+	 *
+	 * @return void
+	 * @author Christoph Gostner 
+	 * @see pi1/helper/tx_cgswigmore_publication#getMarker()
+	 */
 	public function __construct() {
 		parent::__construct();
 
@@ -60,9 +69,11 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 * the publications filtered per year.
 	 *
 	 * @see pi1/helper/tx_cgswigmore_helper_base#fillTemplate()
-	 * @return 	string	The result of the publication view
+	 * @return string The result of the publication view
+	 * @author Christoph Gostner
+	 * @see pi1/helper/util/tx_cgswigmore_helper_base_interface#fillTemplate()
 	 */
-	protected function fillTemplate($select = array()) {
+	public function fillTemplate($select = array()) {
 		$view = $this->conf['view'];
 
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_VIEW_LPY###', '###TEMPLATE_PUBLICATION_ROW###'));
@@ -76,95 +87,30 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 				$select['where'][] = 'tx_cgswigmore_publication.date >= ' .$under. ' AND tx_cgswigmore_publication.date <= ' . $upper;
 
 				$rowRes = $this->getDbResult($this->conf['sort'], $select);
-				$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = $this->fillPublicationTemplate($rowRes, $template['item1']);
+				$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = $this->fillTemplateWithResource($rowRes, $template['item1']);
 			} else {
 				$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = '';
 			}
 		} else { /* AIO */
 			$rowRes = $this->getDbResult($this->conf['sort'], $select);
-			$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = $this->fillPublicationTemplate($rowRes, $template['item1']);
+			$subpartArray['###TEMPLATE_PUBLICATION_ROW###'] = $this->fillTemplateWithResource($rowRes, $template['item1']);
 			$subpartArray['###TEMPLATE_VIEW_LPY###'] = '';
 		}
 
-		$markerArray = $this->tx_reference->getTemplateMarkers();
-		$c = $this->cObj->substituteMarkerArrayCached($template['total'], $markerArray, $subpartArray);
-		#t3lib_div::debug($c);
-		return $c; 
-	}
-
-	/**
-	 * This method fills the part of the LPY view when the view is set per typoscript.
-	 * If the selectbox was already submitted, the selected year will be marked and set
-	 * as selected in the select box.
-	 * If the select box was submitted with an empty result, the method isn't called, because
-	 * this is filtered upstairs.
-	 *
-	 * @param	mixed	$template: The template to fill with the years to select
-	 * @return 	string	The filled templates with the select box containig all the different years for the publications
-	 */
-	private function fillTemplateViewLpy($template) {
-		$yearArr = $this->getUniqueYears();
-		$sYear = intval($this->getPvalue('year'));
-		$content = '';
-		$subTemplate = $this->cObj->getSubpart($template, '###TEMPLATE_VIEW_LPY_YEAR_ROW###');
-
-		foreach ($yearArr as $year) {
-			$markerArray['###TEMPLATE_VIEW_LPY_YEAR###'] = $year;
-			if ($year == $sYear)
-			$markerArray['###TEMPLATE_VIEW_LPY_YEAR_SELECTED###'] = 'selected="selected"';
-			else
-			$markerArray['###TEMPLATE_VIEW_LPY_YEAR_SELECTED###'] = '';
-			$content .= $this->cObj->substituteMarkerArrayCached($subTemplate, $markerArray);
-		}
-
-		$subpartArray['###TEMPLATE_VIEW_LPY_YEAR_ROW###'] = $content;
-		$markerArray = $this->tx_reference->getTemplateMarkers();
-		$subpartArray['###TEMPLATE_VIEW_LPY_YEAR_TITLE###'] = $sYear == 0 ? '' : $sYear;
-		return $this->cObj->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
-	}
-
-	/**
-	 * This method selects all the publications in the database and returns an
-	 * array with the years, when the publications where published.
-	 *
-	 * @return	array	An array with the years, when the publications where published
-	 */
-	private function getUniqueYears() {
-		$years = array();
-		$res = $this->getDbResult('date ASC');
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-			$y = date('Y', $row['date']);
-			$years[$y] = $y;
-		}
-		return array_keys($years);
-	}
-
-	/**
-	 * After we made the request for publication here we now iterate
-	 * thru the result set and fill the publications in the subtemplate.
-	 *
-	 * @param 	mixed	$res: The result set containing all the publications to display
-	 * @param	miexed	$template: The subtemplate to fill with the publications
-	 * @return	string	The subtemplate, filled with all the publications in the result set
-	 */
-	private function fillPublicationTemplate($res, $template) {
-		$content = '';
-
-		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-			$content .= $this->fillRow($row, $template);
-		}
-
-		return $content;
+		$markerArray = $this->getTemplateMarkers();
+		return $this->substituteMarkerArrayCached($template['total'], $markerArray, $subpartArray);
 	}
 
 	/**
 	 * This method fills a single publication in the subtemplate.
 	 *
-	 * @param	array	$row: The publication's data
-	 * @param 	mixed	$template: The subtemplate to fill
-	 * @return	string	The content of the publication filled in the subtemplate
+	 * @param array	$row The publication's data
+	 * @param mixed	$template The subtemplate to fill
+	 * @return string The content of the publication filled in the subtemplate
+	 * @author Christoph Gostner
+	 * @see pi1/helper/util/tx_cgswigmore_helper_base_interface#fillRow()
 	 */
-	private function fillRow($row, $template) {
+	public function fillRow($row, $template) {
 		$markerArray = $this->getMarker($row);
 
 		$index = 0;
@@ -172,19 +118,19 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 			$index = 1;
 
 		$subPartNames = array('###TEMPLATE_PUBLICATION_ROW_WITH_LINKS###', '###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS###');
-		$subTemplate = $this->cObj->getSubpart($template, $subPartNames[$index]);
+		$subTemplate = $this->getSubTemplate($template, $subPartNames[$index]);
 
 		$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = '';
 		if (isset($this->conf['icon']) && $this->conf['icon']) {
 			$iMarkerArray['###PUBLICATION_FILE_ICON###'] = $this->getFileLink($row);
-			$iSubTemplate = $this->cObj->getSubpart($subTemplate, '###TEMPLATE_PUBLICATION_ROW_FILE_ICON###');
-			$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = $this->cObj->substituteMarkerArrayCached($iSubTemplate, $iMarkerArray);
+			$iSubTemplate = $this->getSubTemplate($subTemplate, '###TEMPLATE_PUBLICATION_ROW_FILE_ICON###');
+			$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = $this->substituteMarkerArrayCached($iSubTemplate, $iMarkerArray);
 		}
 
-		$subpartArray[$subPartNames[$index]] = $this->cObj->substituteMarkerArrayCached($subTemplate, $markerArray, $iSubpartArray);
+		$subpartArray[$subPartNames[$index]] = $this->substituteMarkerArrayCached($subTemplate, $markerArray, $iSubpartArray);
 		$subpartArray[$subPartNames[($index+1)%2]] = '';
 
-		return $this->cObj->substituteMarkerArrayCached($template, array(), $subpartArray);
+		return $this->substituteMarkerArrayCached($template, array(), $subpartArray);
 	}
 
 	/**
@@ -196,12 +142,13 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 * Year) to predefine the time range, the publications should be
 	 * displayed/selected.
 	 *
-	 * @param	string	$sort: How the publications should by sorted
-	 * @return	mixed	The result from the request for publications
+	 * @param string $sort How the publications should by sorted
+	 * @return mixed The result from the request for publications
+	 * @author Christoph Gostner
+	 * @see pi1/helper/util/tx_cgswigmore_helper_base_interface#getDbResult()
 	 */
-	private function getDbResult($sort, $select = array()) {
+	public function getDbResult($sort, $select = array()) {
 		$idArr = $this->getStorageIds();
-		// begin creating the query
 		$select['select'][] = 'tx_cgswigmore_publication.*';
 		$select['table'][] = 'tx_cgswigmore_publication';
 		$select['where'][] = $this->getWhereAdd('tx_cgswigmore_publication');
@@ -216,8 +163,10 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 *
 	 * @param array $row The publication's information.
 	 * @return An array with the publication's markers.
+	 * @author Christoph Gostner
+	 * @see pi1/helper/util/tx_cgswigmore_helper_base_interface#getMarker()
 	 */
-	protected function getMarker($row) {
+	public function getMarker($row, $object = NULL) {
 		$markerArray = $this->getMarkerFromArr($row);
 		$markerArray['###PUBLICATION_LINK###'] = '';
 
@@ -229,11 +178,60 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 
 		if (isset($this->conf['link']) && $this->conf['link']) {
 			$userFunc = $this->conf['userFunc'];
-			$link = t3lib_div::callUserFunction($userFunc, $row, &$this->tx_reference);
+			$link = $this->callUserFunc($userFunc, $row);
 
 			$markerArray['###PUBLICATION_LINK###'] = $link;
 		}
 		return $markerArray;
+	}
+
+	/**
+	 * This method fills the part of the LPY view when the view is set per typoscript.
+	 * If the selectbox was already submitted, the selected year will be marked and set
+	 * as selected in the select box.
+	 * If the select box was submitted with an empty result, the method isn't called, because
+	 * this is filtered upstairs.
+	 *
+	 * @param mixed $template The template to fill with the years to select
+	 * @return string The filled templates with the select box containig all the different years for the publications
+	 * @author Christoph Gostner
+	 */
+	private function fillTemplateViewLpy($template) {
+		$yearArr = $this->getUniqueYears();
+		$sYear = intval($this->getPvalue('year'));
+		$content = '';
+		$subTemplate = $this->getSubTemplate($template, '###TEMPLATE_VIEW_LPY_YEAR_ROW###');
+
+		foreach ($yearArr as $year) {
+			$markerArray['###TEMPLATE_VIEW_LPY_YEAR###'] = $year;
+			if ($year == $sYear)
+			$markerArray['###TEMPLATE_VIEW_LPY_YEAR_SELECTED###'] = 'selected="selected"';
+			else
+			$markerArray['###TEMPLATE_VIEW_LPY_YEAR_SELECTED###'] = '';
+			$content .= $this->substituteMarkerArrayCached($subTemplate, $markerArray);
+		}
+
+		$subpartArray['###TEMPLATE_VIEW_LPY_YEAR_ROW###'] = $content;
+		$markerArray = $this->getTemplateMarkers();
+		$subpartArray['###TEMPLATE_VIEW_LPY_YEAR_TITLE###'] = $sYear == 0 ? '' : $sYear;
+		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
+	}
+
+	/**
+	 * This method selects all the publications in the database and returns an
+	 * array with the years, when the publications where published.
+	 *
+	 * @return array An array with the years, when the publications where published
+	 * @author Christoph Gostner
+	 */
+	private function getUniqueYears() {
+		$years = array();
+		$res = $this->getDbResult('date ASC');
+		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			$y = date('Y', $row['date']);
+			$years[$y] = $y;
+		}
+		return array_keys($years);
 	}
 }
 

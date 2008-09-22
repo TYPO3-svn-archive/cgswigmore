@@ -147,9 +147,7 @@ class tx_cgswigmore_section extends tx_cgswigmore_helper_base {
 				break;
 			case self::SECTION_SELECT_HOME: 
 			default:
-				#$subTemplate = $this->getSubTemplate($template, '###TEMPLATE_SECTION_HOME###');
 				$subpartArray['###TEMPLATE_SECTION_HOME###'] = $this->fillSectionDetail($row['uid'], $markerArray, $this->getSubTemplate($template, '###TEMPLATE_SECTION_HOME###')); 
-				#$this->substituteMarkerArrayCached($subTemplate, $markerArray);
 		}
 		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}

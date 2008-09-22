@@ -187,7 +187,6 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 			$markerArray['###STAFF_LINK_SECTION###'] = $this->getSectionMarker($row['uid']);
 			$markerArray['###STAFF_SECTION###'] = $this->getSectionMarker($row['uid'], false);
 		}
-		
 		return $markerArray;
 	}
 

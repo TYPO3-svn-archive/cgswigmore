@@ -50,7 +50,6 @@ class tx_cgswigmore_factory {
 	 * @author Christoph Gostner
 	 */
 	private function __construct() {
-		
 	}
 	
 	/**
@@ -77,7 +76,8 @@ class tx_cgswigmore_factory {
 	public static function getInstance($className) {
 		$obj = &t3lib_div::makeInstance($className);
 		
-		$obj->setConf(self::$reference->conf);
+		$obj->setConf(self::$reference->conf[$obj->getClassConfKey()]);
+#		$obj->setConf(self::$reference->conf);
 		$obj->setTxReference(self::$reference);
 		
 		return $obj;

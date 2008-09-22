@@ -61,12 +61,6 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	protected $tableKeys;
 
 	/**
-	 * The typoscript configuration.
-	 *
-	 * @var array
-	 */
-	private $txConf;
-	/**
 	 * The typoconf for the selected view.
 	 *
 	 * @var array
@@ -116,13 +110,12 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 * Set the global configuration and the configuration
 	 * for the selected view.
 	 *
-	 * @param array $txConf
+	 * @param array $conf
 	 * @return void
 	 * @author Christoph Gostner
 	 */
-	public function setConf($txConf) {
-		$this->txConf = $txConf;
-		$this->conf = $txConf[$this->getClassConfKey()];
+	public function setConf($conf) {
+		$this->conf = $conf;
 	}
 
 	/**
@@ -515,7 +508,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 * @return string The typoscript configuration key for the class
 	 * @author Christoph Gostner
 	 */
-	private function getClassConfKey() {
+	public function getClassConfKey() {
 		return $this->getDbTableName().'.';
 	}
 

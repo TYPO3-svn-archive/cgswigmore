@@ -97,12 +97,11 @@ class tx_cgswigmore_section extends tx_cgswigmore_helper_base {
 		} else {
 			$res = $this->getDbResult($this->conf['sort'], $select);
 		}
-
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_SECTION_ROW###'));
 		
 		$markerArray = array();
 		$subpartArray['###TEMPLATE_SECTION_ROW###'] = $this->fillTemplateWithResource($res, $template['item0']);
-		
+	
 		return $this->substituteMarkerArrayCached($template['total'], $markerArray, $subpartArray);
 	}
 	
@@ -196,16 +195,20 @@ class tx_cgswigmore_section extends tx_cgswigmore_helper_base {
 		if ($this->createStaffLink) {
 			$staff = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_staff');
 			$staff->setMasterTemplateMarker('###TEMPLATE_SECTION_LEADER###');
-			$select['where'][] = 'tx_cgswigmore_staff.uid = ' . $row['leader1'];
-			$markerArray['###SECTION_LEADER1###'] = $staff->init($select);
+
+			$markerArray['###SECTION_LEADER1###'] = '';
+			$markerArray['###SECTION_LEADER2###'] = '';
+
+			if (intval($row['leader1']) > 0) {
+				$select1['where'][] = 'tx_cgswigmore_staff.uid = ' . $row['leader1'];
+				$markerArray['###SECTION_LEADER1###'] = $staff->init($select1);
+			}
 			
-			$select = array();
-			$select['where'][] = 'tx_cgswigmore_staff.uid = ' . $row['leader2'];
-			
-			$select['where'][] = 'tx_cgswigmore_staff.uid = ' . $row['leader2'];
-			$markerArray['###SECTION_LEADER2###'] = $staff->init($select);
+			if (intval($row['leader2']) > 0) {
+				$select2['where'][] = 'tx_cgswigmore_staff.uid = ' . $row['leader2'];
+				$markerArray['###SECTION_LEADER2###'] = $staff->init($select2);
+			}
 		}
-		
 		return $markerArray;
 	}
 	
@@ -299,7 +302,7 @@ class tx_cgswigmore_section extends tx_cgswigmore_helper_base {
 		$markerArray['###FILE_FILE###'] = '';
 		
 		if (file_exists($this->getUploadDir() . $row['file'])) {
-			$markerArray['###FILE_FILE###'] = $this->getFileLink($row);
+			$markerArray['###FILE_FILE###'] = $this->getFileIconLink($row);
 		}
 		return $markerArray;
 	}

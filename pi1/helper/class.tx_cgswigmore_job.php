@@ -78,7 +78,6 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 			$this->setMasterTemplateMarker('###TEMPLATE_CJS###');
 		}
 		$res = $this->getJobCategoryDbResult($this->conf['category.']['sort'], $select);
-		
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_JOBCATEGORY_ROW###'));
 		
 		$markerArray = $this->getTemplateMarkers();
@@ -145,7 +144,7 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 				'job::select' => $row['uid'],
 			));
 		$markerArray['###JOB_LINK_TITLE###'] = $this->createLink($parameter, $row['title']);
-		$markerArray['###JOB_FILE###'] = $this->getFileLink($row);
+		$markerArray['###JOB_FILE###'] = $this->getFileIconLink($row);
 
 		return $markerArray;
 	}

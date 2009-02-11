@@ -230,12 +230,13 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 	/**
 	 * The method fills the sections in the template.
 	 * This method uses the tx_cgswigmore_section class to fill the template.
-	 * Thru the tx_cgswigmore_factory class we get a reference to the the
+	 * Thru the tx_cgswigmore_factory class we get a reference to the
 	 * tx_cgswigmore_section class. For this reason the template used for the 
 	 * section list is defined in the section's template, and not in the staff's 
 	 * template. 
 	 * To get only those sections that are referenced to the selected 
-	 * employee, the section's query is modify to only contain this sections.
+	 * employee, the section's query is modify to only contain the staff member's
+	 * sections.
 	 * 
 	 * @param int $uid The staff's UID
 	 * @param boolean $link Which master template marker should be used, linked or not?
@@ -247,9 +248,9 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$content = '';
 		if ($this->createSectionLink) {
 			$sectionUidArr = self::getStaffSectionUid($uid);
+			$idArr = split(',', $this->conf['section.']['doNotLink']);
 			$section = tx_cgswigmore_factory::getInstance('tx_cgswigmore_section');
 			$section->createStaffLinks(false);
-			$idArr = split(',', $this->conf['section.']['doNotLink']);
 			
 			if ($link) {
 				$diff = array_diff($sectionUidArr, $idArr);

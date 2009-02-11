@@ -22,12 +22,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmore_job.php');
-require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmore_location.php');
-require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmore_publication.php');
-require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmore_section.php');
-require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.tx_cgswigmore_staff.php');
-
 /**
  * Plugin 'Company managment tool' for the 'cgswigmore' extension.
  *
@@ -74,10 +68,12 @@ class tx_cgswigmore_factory {
 	 * @author Christoph Gostner
 	 */
 	public static function getInstance($className) {
+		$clazz = t3lib_extMgm::extPath('cgswigmore').'pi1/helper/class.' . $className . '.php';
+		require_once ($clazz);
+
 		$obj = &t3lib_div::makeInstance($className);
-		
-		$obj->setConf(self::$reference->conf[$obj->getClassConfKey()]);
-#		$obj->setConf(self::$reference->conf);
+		$conf = self::$reference->conf[$obj->getClassConfKey()];
+		$obj->setConf($conf);
 		$obj->setTxReference(self::$reference);
 		
 		return $obj;

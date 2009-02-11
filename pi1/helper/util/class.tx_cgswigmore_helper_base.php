@@ -210,7 +210,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 			$sysFolders = array();
 
 			foreach ($idArr as $id) {
-				$sysFolders[] = $this->setSysFolders($id, &$sysFolder);
+				$sysFolders = $this->setSysFolders($id, &$sysFolder);
 			}
 			return $sysFolders;
 		}
@@ -243,6 +243,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 * @author Christoph Gostner
 	 */
 	private function setSysFolders($uid, $sysfolders) {
+		$sysfolders[] = $uid;
 		$select['select'][] = 'pages.uid';
 		$select['table'][] = 'pages';
 		$select['where'][] = 'pid = ' . $uid;
@@ -251,9 +252,12 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		$res = self::getSelectDbRes($select);
 
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
-			$sysfolders[] = $this->setSysFolders($row['uid'], &$sysfolders);
+			$sysfolders =  array_merge($sysfolders, $this->setSysFolders($row['uid'], &$sysfolders));
 		}
-		return $uid;
+		if (count($sysfolders) > 1) {
+			$sysfolders = array_unique($sysfolders);
+		}
+		return $sysfolders;
 	}
 
 	/**
@@ -264,6 +268,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 */
 	private function getStorageIdsRecursivly() {
 		$recursive = FALSE;
+
 		if (isset($this->cObj->data['recursive']) && $this->cObj->data['recursive']) {
 			$recursive = $this->cObj->data['recursive'];
 		} elseif (isset($this->conf['recursive']) && $this->conf['recursive']) {
@@ -376,7 +381,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 			$values['sort'],
 			$values['limit']
 			);
-			t3lib_div::debug(array($query));
+			t3lib_div::debug(array($query), 'Database select query');
 		}
 
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -413,14 +418,16 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 * @return The link to display with image.
 	 * @author Christoph Gostner
 	 */
-	protected function getFileLink($row) {
+	protected function getFileIconLink($row) {
 		$fullPath = $this->getUploadDir() . $row['file'];
 		if (is_file($fullPath)) {
 			$image = $this->checkMimeTypeImage($fullPath);
 
-			$userFunc = $this->conf['icon.']['userFunc'];
-			$typolink_conf['parameter'] = t3lib_div::callUserFunction($userFunc, $row, &$this->tx_reference);
-
+			$typolink_conf['parameter'] = array();
+			if (isset($this->conf['icon.']['userFunc'])) {
+				$userFunc = $this->conf['icon.']['userFunc'];
+				$typolink_conf['parameter'] = t3lib_div::callUserFunction($userFunc, $row, &$this->tx_reference);
+			}
 			return $this->cObj->typolink($image, $typolink_conf);
 		}
 		return '';

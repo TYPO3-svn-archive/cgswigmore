@@ -81,7 +81,7 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 			$subpartArray['###TEMPLATE_VIEW_LPY###'] = $this->fillTemplateViewLpy($template['item0']);
 			$year = intval($this->getPvalue('year'));
 				
-			if (!is_null($year) && strlen($year) == 4) {
+			if (!is_null($year) && intval($year) > 0 && strlen($year) == 4) {
 				$under = mktime(0,0,0,1,1,$year);
 				$upper = mktime(0,0,0,12,31,$year);
 				$select['where'][] = 'tx_cgswigmore_publication.date >= ' .$under. ' AND tx_cgswigmore_publication.date <= ' . $upper;
@@ -114,7 +114,7 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 		$markerArray = $this->getMarker($row);
 
 		$index = 0;
-		if (isset($this->conf['link']) && !$this->conf['link'])
+		if (!isset($this->conf['link']) || !$this->conf['link'])
 			$index = 1;
 
 		$subPartNames = array('###TEMPLATE_PUBLICATION_ROW_WITH_LINKS###', '###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS###');
@@ -122,7 +122,7 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 
 		$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = '';
 		if (isset($this->conf['icon']) && $this->conf['icon']) {
-			$iMarkerArray['###PUBLICATION_FILE_ICON###'] = $this->getFileLink($row);
+			$iMarkerArray['###PUBLICATION_FILE_ICON###'] = $this->getFileIconLink($row);
 			$iSubTemplate = $this->getSubTemplate($subTemplate, '###TEMPLATE_PUBLICATION_ROW_FILE_ICON###');
 			$iSubpartArray['###TEMPLATE_PUBLICATION_ROW_FILE_ICON###'] = $this->substituteMarkerArrayCached($iSubTemplate, $iMarkerArray);
 		}
@@ -175,9 +175,8 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 		} else {
 			$markerArray['###PUBLICATION_DATE###'] = '';
 		}
-
 		if (isset($this->conf['link']) && $this->conf['link']) {
-			$userFunc = $this->conf['userFunc'];
+			$userFunc = $this->conf['link.']['userFunc'];
 			$link = $this->callUserFunc($userFunc, $row);
 
 			$markerArray['###PUBLICATION_LINK###'] = $link;

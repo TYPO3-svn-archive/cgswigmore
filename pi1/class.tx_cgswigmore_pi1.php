@@ -102,7 +102,8 @@ class tx_cgswigmore_pi1 extends tslib_pibase {
 			case 'JOB':
 			case 'SECTION':
 			case 'LOCATION':
-				$cgswigmoreObj = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_' . $conf['display']);
+				$clazz = 'tx_cgswigmore_' . strtolower($conf['display']);
+				$cgswigmoreObj = &tx_cgswigmore_factory::getInstance($clazz);
 				$content .= $cgswigmoreObj->init();
 				break;
 			default:

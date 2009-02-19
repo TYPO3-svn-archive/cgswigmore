@@ -25,65 +25,65 @@ Publication specific:
 ###PUBLICATION_FILE###
 ###PUBLICATION_LINK###
 
+Template for the publication list
 <!-- ###TEMPLATE### start -->
-	<h1>
-		###TEMPLATE_PUBLICATION_PAGE_TITLE###
-	</h1>
-	
-	<!-- ###TEMPLATE_VIEW_LPY### start -->
-		<div class="tx-cgswigmore-pi1-DIV-box">
-			<form action="###TEMPLATE_VIEW_LPY_ACTION_URL###" method="post" >
-			<select name="tx_cgswigmore_pi1[year]">
-				<option value="-"></option>
-				<!-- ###TEMPLATE_VIEW_LPY_YEAR_ROW### start -->
-				<option ###TEMPLATE_VIEW_LPY_YEAR_SELECTED### value="###TEMPLATE_VIEW_LPY_YEAR###">###TEMPLATE_VIEW_LPY_YEAR###</option>
-				<!-- ###TEMPLATE_VIEW_LPY_YEAR_ROW### end -->
-			</select>
-			<input type="submit" value="###TEMPLATE_VIEW_LPY_SUBMIT###" />
-			</form>
-			<br />
-			<b>###TEMPLATE_PUBLICATION_PAGE_TITLE###: ###TEMPLATE_VIEW_LPY_YEAR_TITLE###</b><br />
-		</div>
-		<br />
-	<!-- ###TEMPLATE_VIEW_LPY### end -->
-	
-	<!-- ###TEMPLATE_PUBLICATION_ROW### start -->
-		<div class="tx-cgswigmore-pi1-DIV-box">
-			<!-- ###TEMPLATE_PUBLICATION_ROW_WITH_LINKS### start -->
-				<p class="tx-cgswigmore-pi1-P-pubitem">
-						<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### start --> 
-							###PUBLICATION_FILE_ICON###
-						<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### end -->
-						<a href="###PUBLICATION_LINK###" target="_blank">
-							###PUBLICATION_TITLE###
-						</a>
-					<p class="tx-cgswigmore-pi1-P-author">
-						###PUBLICATION_AUTHOR###
+	<div class="tx-cgswigmore-pi1-DIV-box">
+		<h1>
+			###TEMPLATE_PUBLICATION_PAGE_TITLE###
+		</h1>
+		<!-- ###TEMPLATE_VIEW_LPY### start -->
+			<div class="tx-cgswigmore-pi1-DIV-box">
+				<form action="###TEMPLATE_VIEW_LPY_ACTION_URL###" method="post">
+					<select name="tx_cgswigmore_pi1[year]">
+						<option value="-"></option>
+						<!-- ###TEMPLATE_VIEW_LPY_YEAR_ROW### start -->
+							<option ###TEMPLATE_VIEW_LPY_YEAR_SELECTED### value="###TEMPLATE_VIEW_LPY_YEAR###">###TEMPLATE_VIEW_LPY_YEAR###</option>
+						<!-- ###TEMPLATE_VIEW_LPY_YEAR_ROW### end -->
+					</select>
+					<input type="submit" value="###TEMPLATE_VIEW_LPY_SUBMIT###" />
+				</form>
+				<b>###TEMPLATE_PUBLICATION_PAGE_TITLE###: ###TEMPLATE_VIEW_LPY_YEAR_TITLE###</b>
+			</div>
+		<!-- ###TEMPLATE_VIEW_LPY### end -->
+		<!-- ###TEMPLATE_PUBLICATION_ROW### start -->
+			<div class="tx-cgswigmore-pi1-DIV-box">
+				<!-- ###TEMPLATE_PUBLICATION_ROW_WITH_LINKS### start -->
+					<p>
+						<p>
+							<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### start --> 
+								###PUBLICATION_FILE_ICON###
+							<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### end -->
+							<a href="###PUBLICATION_LINK###" target="_blank">
+								###PUBLICATION_TITLE###
+							</a>
+						</p>
+						<p class="tx-cgswigmore-pi1-P-publication-line">
+							###PUBLICATION_AUTHOR###
+						</p>
+						<p class="tx-cgswigmore-pi1-P-publication-line">
+							###PUBLICATION_JOURNAL### ###PUBLICATION_DATE###; ###PUBLICATION_VOLUME###
+							(###PUBLICATION_NUMBER###)###PUBLICATION_PAGES###. ###PUBLICATION_NOTE###
+						</p>
 					</p>
-					<p class="tx-cgswigmore-pi1-P-journal">
-						###PUBLICATION_JOURNAL### ###PUBLICATION_DATE###; ###PUBLICATION_VOLUME###
-						(###PUBLICATION_NUMBER###)###PUBLICATION_PAGES###. ###PUBLICATION_NOTE###
-					</p> 
-				</p>
-			<!-- ###TEMPLATE_PUBLICATION_ROW_WITH_LINKS### end -->
-
-			<!-- ###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS### start -->
-				<p class="tx-cgswigmore-pi1-P-pubitem">
-					<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### start --> 
-						###PUBLICATION_FILE_ICON###
-					<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### end -->
-					###PUBLICATION_TITLE###
-				</p>
-				<p class="tx-cgswigmore-pi1-P-author">
-					###PUBLICATION_AUTHOR###
-				</p>
-				<p class="tx-cgswigmore-pi1-P-journal">
-					###PUBLICATION_JOURNAL### ###PUBLICATION_DATE###; ###PUBLICATION_VOLUME###
-					(###PUBLICATION_NUMBER###)###PUBLICATION_PAGES###. ###PUBLICATION_NOTE###
-				</p>
-			<!-- ###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS### end -->
-		</div>	 
-	<!-- ###TEMPLATE_PUBLICATION_ROW### end -->
-
+				<!-- ###TEMPLATE_PUBLICATION_ROW_WITH_LINKS### end -->
+				<!-- ###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS### start -->
+					<p>
+						<p>
+							<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### start --> 
+								###PUBLICATION_FILE_ICON###
+							<!-- ###TEMPLATE_PUBLICATION_ROW_FILE_ICON### end -->
+							###PUBLICATION_TITLE###
+						</p>
+						<p class="tx-cgswigmore-pi1-P-publication-line">
+							###PUBLICATION_AUTHOR###
+						</p>
+						<p class="tx-cgswigmore-pi1-P-publication-line">
+							###PUBLICATION_JOURNAL### ###PUBLICATION_DATE###; ###PUBLICATION_VOLUME###
+							(###PUBLICATION_NUMBER###)###PUBLICATION_PAGES###. ###PUBLICATION_NOTE###
+						</p>
+					</p>
+				<!-- ###TEMPLATE_PUBLICATION_ROW_WITHOUT_LINKS### end -->
+			</div>
+		<!-- ###TEMPLATE_PUBLICATION_ROW### end -->
+	</div>
 <!-- ###TEMPLATE### end -->
-

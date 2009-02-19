@@ -20,84 +20,108 @@ Section specific:
 ###SECTION_LINK_SECTION###
 ###SECTION_LINK_TITLE###
 
+Template for the section list
 <!-- ###TEMPLATE### start -->
-	
-	<!-- ###TEMPLATE_SECTION_ROW### start -->
-		<div class="tx-cgswigmore-pi1-DIV-box">
-			<div class="tx-cgswigmore-pi1-DIV-image">
-				###SECTION_PHOTO###
-			</div>
-			
-			<h1>
-				###SECTION_LINK_SECTION###
-			</h1>
-			<p class="tx-cgswigmore-pi1-P-title">
-				###SECTION_TITLE###
+	<div class="tx-cgswigmore-pi1-DIV-box">
+		<!-- ###TEMPLATE_SECTION_ROW### start -->
+			<p>
+				<span class="tx-cgswigmore-pi1-SPAN-section-photo">
+					###SECTION_PHOTO###
+				</span>
+				<div class="tx-cgswigmore-pi1-DIV-border-box">
+					<div class="tx-cgswigmore-pi1-DIV-inner-box">
+						<h3>###SECTION_LINK_SECTION###</h3>
+						<span class="tx-cgswigmore-pi1-SPAN-section-title">
+							###SECTION_TITLE### <br />
+						</span>
+						<span class="tx-cgswigmore-pi1-SPAN-section-leaders">
+							###SECTION_LEADER1### / ###SECTION_LEADER2###
+						</span>
+					</div>
+				</div>
 			</p>
-			<p class="tx-cgswigmore-pi1-P-leaders">
-				###SECTION_LEADER1### / ###SECTION_LEADER2###
-			</p>
-		</div>
-	<!-- ###TEMPLATE_SECTION_ROW### end -->
-	
+		<!-- ###TEMPLATE_SECTION_ROW### end -->
+	</div>
 <!-- ###TEMPLATE### end -->
 
-###TEMPLATE_DETAIL###
-
+Template for a single section.
+To keep the extension's code simple the content of the section is wrapped by [###]TEMPLATE_SECTION_ROW[###] elements
+<!-- ###TEMPLATE_DETAIL### start -->
 	<!-- ###TEMPLATE_SECTION_ROW### start -->
-		<div class="tx-cgswigmore-pi1-DIV-detail">
+		<div class="tx-cgswigmore-pi1-DIV-box">
+			<h1>
+				###SECTION_TITLE###
+				<span>
+					(###SECTION_SECTION###)
+				</span> 
+			</h1>
+
 			<div class="tx-cgswigmore-pi1-DIV-menu">
-				<ul>
-					<!-- ###TEMPLATE_SECTION_MENU_ITEM### start -->
-						<li class="bullet">
-							###SECTION_LINK_MENU_ITEM###
-						</li>
-					<!-- ###TEMPLATE_SECTION_MENU_ITEM### end -->
-				</ul>
+					<ul class="tx-cgswigmore-pi1-UL-menu">
+						<!-- ###TEMPLATE_SECTION_MENU_ITEM### start -->
+							<li>
+								###SECTION_LINK_MENU_ITEM###
+							</li>
+						<!-- ###TEMPLATE_SECTION_MENU_ITEM### end -->
+					</ul>
+					<ul class="tx-cgswigmore-pi1-ALL-clear" />
 			</div>
 			
-			<div class="tx-cgswigmore-pi1-DIV-box2">
-				<h1>
-				###SECTION_TITLE### (###SECTION_SECTION###)
-				</h1>
-				<p>
-					<!-- ###TEMPLATE_SECTION_HOME### start -->
-						###SECTION_DESCRIPTION###<br />
-						<br />
-						
-						<!-- ###TEMPLATE_SECTION_HOME_FILES### start -->
-							<table>
-								<tbody>
-									<!-- ###TEMPLATE_FILE_ROW### start -->
-										<tr>
-											<td width="5%">
-												###FILE_FILE###
-											</td>
-											<td>
-												###FILE_DESCRIPTION###
-											</td>
-										</tr>
-									<!-- ###TEMPLATE_FILE_ROW### end -->
-								</tbody>
-							</table>
-						<!-- ###TEMPLATE_SECTION_HOME_FILES### end -->
-						
-					<!-- ###TEMPLATE_SECTION_HOME### end -->
-						
-					<!-- ###TEMPLATE_SECTION_HOME### end -->
-					
-					<!-- ###TEMPLATE_SECTION_STAFF### start -->
-					<!-- ###TEMPLATE_SECTION_STAFF### end -->
-					
-					<!-- ###TEMPLATE_SECTION_PUBLICATION### start -->
-					<!-- ###TEMPLATE_SECTION_PUBLICATION### end -->
-				</p>
-			</div>
+			<span>
+				<!-- ###TEMPLATE_SECTION_HOME### start -->
+					<p>
+						###SECTION_PHOTO### <br />
+						###SECTION_DESCRIPTION###
+					</p>
+					<!-- ###TEMPLATE_SECTION_HOME_FILES### start -->
+						<table>
+							<tbody>
+								<!-- ###TEMPLATE_FILE_ROW### start -->
+									<tr>
+										<td width="5%">
+											###FILE_FILE###
+										</td>
+										<td>
+											###FILE_DESCRIPTION###
+										</td>
+									</tr>
+								<!-- ###TEMPLATE_FILE_ROW### end -->
+							</tbody>
+						</table>
+					<!-- ###TEMPLATE_SECTION_HOME_FILES### end -->
+				<!-- ###TEMPLATE_SECTION_HOME### end -->
+				
+				<!-- ###TEMPLATE_SECTION_STAFF### start -->
+					This is the template marker for the section's staff list.
+					For the template definition please open the file staff.html 
+					and search for the template marker [###]TEMPLATE_SECTION[###]
+				<!-- ###TEMPLATE_SECTION_STAFF### end -->
+				
+				<!-- ###TEMPLATE_SECTION_PUBLICATION### start -->
+					This is the template marker for the section's publication list.
+					For the template definition itself please open the file
+					publication.html. Because the publication class is used here 
+					all the typoscript definitions you made for the publications 
+					will have effect here.   
+				<!-- ###TEMPLATE_SECTION_PUBLICATION### end -->
+			</span>
 		</div>
 	<!-- ###TEMPLATE_SECTION_ROW### end -->
-	
-###TEMPLATE_DETAIL###
+<!-- ###TEMPLATE_DETAIL### end -->
 
-###TEMPLATE_STAFF_LINK_SECTION###<!-- ###TEMPLATE_SECTION_ROW### start -->###SECTION_LINK_TITLE###, <!-- ###TEMPLATE_SECTION_ROW### end -->###TEMPLATE_STAFF_LINK_SECTION###
+Template for the section's list of a staff member.
+The section's name will be linked to the section's page 
+(if it's not prohibited to link the section by typoscript).
+<!-- ###TEMPLATE_STAFF_LINK_SECTION### start -->
+	<!-- ###TEMPLATE_SECTION_ROW### start -->
+		###SECTION_LINK_TITLE###, 
+	<!-- ###TEMPLATE_SECTION_ROW### end -->
+<!-- ###TEMPLATE_STAFF_LINK_SECTION### end -->
 
-###TEMPLATE_STAFF_SECTION###<!-- ###TEMPLATE_SECTION_ROW### start -->###SECTION_TITLE###, <!-- ###TEMPLATE_SECTION_ROW### end -->###TEMPLATE_STAFF_SECTION###
+Template for the section's list of a staff member.
+The section's name will not be linked to the section's page.
+<!-- ###TEMPLATE_STAFF_SECTION### start -->
+	<!-- ###TEMPLATE_SECTION_ROW### start -->
+		###SECTION_TITLE###, 
+	<!-- ###TEMPLATE_SECTION_ROW### end -->
+<!-- ###TEMPLATE_STAFF_SECTION### end -->

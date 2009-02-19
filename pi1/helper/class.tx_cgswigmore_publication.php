@@ -39,7 +39,7 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 * Additional markers are defined in tx_cgswigmore_publication->getMarker(...)
 	 *
 	 * @return void
-	 * @author Christoph Gostner 
+	 * @author Christoph Gostner
 	 * @see pi1/helper/tx_cgswigmore_publication#getMarker()
 	 */
 	public function __construct() {
@@ -48,17 +48,17 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 		$this->tableKeys = array(
 			'uid',
 			'pid',
-			'author', 
-			'title', 
-			'journal', 
-			'date', 
+			'author',
+			'title',
+			'journal',
+			'date',
 			'volume',
-			'pages', 
-			'note', 
-			'pmid', 
-			'staff', 
-			'section', 
-			'number', 
+			'pages',
+			'note',
+			'pmid',
+			'staff',
+			'section',
+			'number',
 			'file',
 		);
 	}
@@ -80,7 +80,7 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 		if (strncmp($view, 'LPY', 3) == 0) { /* LPY */
 			$subpartArray['###TEMPLATE_VIEW_LPY###'] = $this->fillTemplateViewLpy($template['item0']);
 			$year = intval($this->getPvalue('year'));
-				
+
 			if (!is_null($year) && intval($year) > 0 && strlen($year) == 4) {
 				$under = mktime(0,0,0,1,1,$year);
 				$upper = mktime(0,0,0,12,31,$year);

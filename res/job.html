@@ -19,7 +19,8 @@ Job specific:
 ###JOB_FILE###
 ###JOB_LINK_TITLE###
 
-###TEMPLATE###
+The list of all available job categories and job descriptions.
+<!-- ###TEMPLATE### start  -->
 	<div class="tx-cgswigmore-pi1-DIV-box">
 		<h1>
 			###TEMPLATE_JOB_PAGE_TITLE###
@@ -30,14 +31,14 @@ Job specific:
 	
 	<!-- ###TEMPLATE_JOBCATEGORY_ROW### start -->
 		<div class="tx-cgswigmore-pi1-DIV-box">
-			<div class="tx-cgswigmore-pi1-DIV-box-jc-list">
+			<div>
 				<h2>###JOBCATEGORY_NAME###</h2>
 			</div>
 			
 			<ul>
 			<!-- ###TEMPLATE_JOB_ROW### begin -->
-				<li class="tx-cgswigmore-pi1-LI-bullet">
-					<h1 class="tx-cgswigmore-pi1-h1-jobtitle">
+				<li>
+					<h1>
 						###JOB_TITLE### ###JOB_FILE###
 					</h1>
 					<p>
@@ -49,6 +50,8 @@ Job specific:
 						<b>###TEMPLATE_JOB_PAGE_CONTACT###</b>
 						<br />
 							<!-- ###TEMPLATE_JOB_ROW_CONTACT_ROW### start -->
+								The contact person. The template definition can be found in 
+								the file staff.html [###]TEMPLATE_JOB_CONTACT[###]
 							<!-- ###TEMPLATE_JOB_ROW_CONTACT_ROW### end -->
 						</p>
 					<!-- ###TEMPLATE_JOB_ROW_CONTACT### end -->
@@ -56,9 +59,11 @@ Job specific:
 			<!-- ###TEMPLATE_JOB_ROW### end -->
 		</div>
 	<!-- ###TEMPLATE_JOBCATEGORY_ROW### start -->
-###TEMPLATE###
+<!-- ###TEMPLATE### end -->
 
-###TEMPLATE_CJS###
+Template for the job category list where only the job title will be displayed.
+The user can select such a job title to display the complete job description. 
+<!-- ###TEMPLATE_CJS### start -->
 	<div class="tx-cgswigmore-pi1-DIV-box">
 		<h1>
 			###TEMPLATE_JOB_PAGE_TITLE###
@@ -69,18 +74,18 @@ Job specific:
 	
 	<!-- ###TEMPLATE_JOBCATEGORY_ROW### start -->
 		<div class="tx-cgswigmore-pi1-DIV-box">
-			<div class="tx-cgswigmore-pi1-DIV-box-jc-list">
+			<div>
 				<h2>###JOBCATEGORY_NAME###</h2>
 			</div>
 			
 			<ul>
 			<!-- ###TEMPLATE_JOB_ROW### begin -->
-				<li class="tx-cgswigmore-pi1-LI-bullet">
-					<h1 class="tx-cgswigmore-pi1-h1-jobtitle">
+				<li>
+					<h1>
 						###JOB_LINK_TITLE###
 					</h1>
 				</li>
 			<!-- ###TEMPLATE_JOB_ROW### end -->
 		</div>
 	<!-- ###TEMPLATE_JOBCATEGORY_ROW### start -->
-###TEMPLATE_CJS###
+<!-- ###TEMPLATE_CJS### end -->

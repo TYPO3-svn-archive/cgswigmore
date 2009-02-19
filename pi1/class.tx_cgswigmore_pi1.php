@@ -40,32 +40,32 @@ class tx_cgswigmore_pi1 extends tslib_pibase {
 
 	/**
 	 * The upload directory
-	 * 
+	 *
 	 * @var string
 	 */
 	private $tx_upload_dir;
 	/**
 	 * The mime type directory where the file icons are locate
-	 * 
+	 *
 	 * @var string
 	 */
 	private $tx_mime_dir;
 	/**
 	 * The language mode
-	 * 
+	 *
 	 * @var string
 	 */
 	private $sys_language_mode;
 	/**
 	 * The language id
-	 * 
+	 *
 	 * @var int
 	 */
 	private $sys_language_id;
-	
+
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @return void
 	 * @author Christoph Gostner
 	 */
@@ -111,40 +111,40 @@ class tx_cgswigmore_pi1 extends tslib_pibase {
 		}
 		return $this->pi_wrapInBaseClass($content);
 	}
-	
+
 	/**
 	 * Get the upload directory of the extension.
-	 * 
+	 *
 	 * @return string The upload directory of the extension
 	 * @author Christoph Gostner
 	 */
 	public function getUploadDir() {
 		return $this->tx_upload_dir;
 	}
-	
+
 	/**
 	 * Get the mime directory where the icons for the files are located.
-	 * 
-	 * @return string The mime directory of the icons 
+	 *
+	 * @return string The mime directory of the icons
 	 * @author Christoph Gostner
 	 */
 	public function getMimeDir() {
 		return $this->tx_mime_dir;
 	}
-	
+
 	/**
 	 * Get the language ID currently set.
-	 * 
+	 *
 	 * @return int The language ID
 	 * @author Christoph Gostner
 	 */
 	public function getLanguageId() {
 		return $this->sys_language_id;
 	}
-	
+
 	/**
 	 * Get the language mode of the page.
-	 * 
+	 *
 	 * @return string The language mode
 	 * @author Christoph Gostner
 	 */

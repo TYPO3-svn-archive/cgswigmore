@@ -39,7 +39,7 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 	 * Additional markers are defined in tx_cgswigmore_location->getMarker(...)
 	 *
 	 * @return void
-	 * @author Christoph Gostner 
+	 * @author Christoph Gostner
 	 * @see pi1/helper/tx_cgswigmore_location#getMarker()
 	 */
 	public function __construct() {
@@ -63,7 +63,7 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 	/**
 	 * Fill the template of for the location.
 	 * The location's UID has to be set per typoscript, if not, the method returns an empty string.
-	 * 
+	 *
 	 * @param array $select An optional string to modify the SQL query
 	 * @return string The filled location's template
 	 * @author Christoph Gostner
@@ -71,21 +71,21 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 	 */
 	public function fillTemplate($select = array()) {
 		$res = $this->getDbResult(NULL, array('where' => array('tx_cgswigmore_location.uid = ' . intval($this->conf['uid']))));
-		
+
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 1) {
 			$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_LOCATION_ROW###'));
-			
+
 			$subpartArray['###TEMPLATE_LOCATION_ROW###'] = $this->fillTemplateWithResource($res, $template['item0']);
 			$markerArray = $this->getTemplateMarkers();
-			
+
 			return $this->substituteMarkerArrayCached($template['total'], $markerArray, $subpartArray);
 		}
 		return NULL;
 	}
-	
+
 	/**
-	 * Fill the template with the information in the passed array. 
-	 * 
+	 * Fill the template with the information in the passed array.
+	 *
 	 * @param array $row The array holding the information to display
 	 * @param mixed $template The template to fill
 	 * @return string The filled template
@@ -94,11 +94,11 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 	 */
 	public function fillRow($row, $template) {
 		$markerArray = $this->getMarker($row);
-		
+
 		$subpartArray['###TEMPLATE_LOCATION_ROW_PHONE###'] = '';
 		$subpartArray['###TEMPLATE_LOCATION_ROW_FAX###'] = '';
 		$subpartArray['###TEMPLATE_LOCATION_ROW_MAIL###'] = '';
-		
+
 		if (strlen($row['phone']) > 0) {
 			$subpartArray['###TEMPLATE_LOCATION_ROW_PHONE###'] = $this->substituteMarkerArrayCached($this->getSubTemplate($template, '###TEMPLATE_LOCATION_ROW_PHONE###'), $markerArray);
 		}
@@ -108,13 +108,13 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 		if (strlen($row['mail']) > 0) {
 			$subpartArray['###TEMPLATE_LOCATION_ROW_MAIL###'] = $this->substituteMarkerArrayCached($this->getSubTemplate($template, '###TEMPLATE_LOCATION_ROW_MAIL###'), $markerArray);
 		}
-		
+
 		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}
-	
+
 	/**
 	 * Get the resource holding the selected location(s).
-	 * 
+	 *
 	 * @param $sort How the result should be sorted
 	 * @param $select Optional parameter used to modify the SQL query
 	 * @return resource The resource holding the selected location(s)
@@ -126,14 +126,14 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 		$select['select'][] = 'tx_cgswigmore_location.*';
 		$select['table'][] = 'tx_cgswigmore_location';
 		$select['where'][] = 'tx_cgswigmore_location.pid IN ('.implode(',', $idArr).')';
-		
+
 		return self::getSelectDbRes($select);
 	}
 
 	/**
 	 * Generate the markers for a location.
-	 * This method extend the markers created by the getMarkerFromArr method. 
-	 * 
+	 * This method extend the markers created by the getMarkerFromArr method.
+	 *
 	 * @param array $row The data to create the markers
 	 * @param mixed $object An optional parameter to pass additional parameters
 	 * @return array The marker for a location
@@ -146,17 +146,17 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 		$markerArray['###LOCATION_FILE###'] = '';
 		if (is_file($this->getUploadDir() . $row['file']))
 			$markerArray['###LOCATION_FILE###'] = $this->createImage($row['file'], $this->conf['image.']);
-		
+
 		$markerArray['###LOCATION_COUNTRY###'] = $this->getCountryText($row['country']);
-		
+
 		$markerArray['###LOCATION_MAIL###'] = $this->createLink($row['mail']);
-		
+
 		return $markerArray;
 	}
-	
+
 	/**
 	 * Get the name of the location's UID to generate the markers.
-	 * 
+	 *
 	 * @param $uid The UID of the country
 	 * @return string The name of the selected location's country
 	 * @author Christoph Gostener
@@ -166,11 +166,11 @@ class tx_cgswigmore_location extends tx_cgswigmore_helper_base {
 		$select['table'][] = 'static_countries';
 		$select['where'][] = 'static_countries.uid = ' . $uid;
 		$res = $this->getSelectDbRes($select);
-		
+
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) != 1) {
 			return '';
 		}
-		
+
 		$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 		return $row['cn_official_name_en'];
 	}

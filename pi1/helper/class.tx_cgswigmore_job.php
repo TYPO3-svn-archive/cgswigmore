@@ -39,7 +39,7 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 	 * Additional markers are defined in tx_cgswigmore_job->getMarker(...)
 	 *
 	 * @return void
-	 * @author Christoph Gostner 
+	 * @author Christoph Gostner
 	 * @see pi1/helper/tx_cgswigmore_job#getMarker()
 	 */
 	public function __construct() {
@@ -56,14 +56,14 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 
 	/**
 	 * Start filling job categories and their jobs in the template.
-	 * The default setting for the job categories/jobs is to view all in a list. 
+	 * The default setting for the job categories/jobs is to view all in a list.
 	 * But if the user set the view option to CJS per typoscript the default behaviour changes
-	 * and only a list of the publication's titles are displayed. The publication's title are 
+	 * and only a list of the publication's titles are displayed. The publication's title are
 	 * linked containig the selected job category and the selected job. The link leads to the same
 	 * page, displaying only the selected job category and the job.
 	 *
 	 * @param array $select Optional parameter to modify the SQL query
-	 * @return string The content of the job database filled in the template 
+	 * @return string The content of the job database filled in the template
 	 * @author Christoph Gostner
 	 * @see pi1/helper/util/tx_cgswigmore_helper_base_interface#fillTemplate()
 	 */
@@ -79,18 +79,18 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 		}
 		$res = $this->getJobCategoryDbResult($this->conf['category.']['sort'], $select);
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_JOBCATEGORY_ROW###'));
-		
+
 		$markerArray = $this->getTemplateMarkers();
 		$subpartArray['###TEMPLATE_JOBCATEGORY_ROW###'] = $this->fillTemplateWithResource($res, $template['item0']);
-		
+
 		return $this->substituteMarkerArrayCached($template['total'], $markerArray, $subpartArray);
 	}
-	
+
 	/**
 	 * The method fills a job category in the template.
 	 * The method fills the template with the job categorie's title and the jobs
 	 * that are set for the job category.
-	 * 
+	 *
 	 * @param array $row The array contains the data of the job category to fill in the template
 	 * @param mixed $template The template to fill with the job category and it's jobs
 	 * @return string The filled template with the job category and it's jobs
@@ -100,17 +100,17 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 	public function fillRow($row, $template) {
 		$markerArray = $this->getJobCategoryMarker($row);
 		$subpartArray['###TEMPLATE_JOB_ROW###'] = $this->fillJobTempate($row['uid'], $this->getSubTemplate($template, '###TEMPLATE_JOB_ROW###'));
-		
+
 		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}
-	
+
 	/**
 	 * Get the avialabe jobs.
-	 * The select parameter contains a limit to only return jobs for a 
+	 * The select parameter contains a limit to only return jobs for a
 	 * certain job category.
-	 * 
+	 *
 	 * @param $sort How the jobs should be sorted
-	 * @param array $select To predefine a part of the SQL query 
+	 * @param array $select To predefine a part of the SQL query
 	 * @return resource The resourcce holding all avaiable jobs
 	 * @author Christoph Gostner
 	 * @see pi1/helper/util/tx_cgswigmore_helper_base_interface#getDbResult()
@@ -121,14 +121,14 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 		$select['where'][] = $this->getWhereAdd('tx_cgswigmore_jobs');
 		$select['where'][] = 'tx_cgswigmore_jobs.sys_language_uid = ' . $this->getLanguageId();
 		$select['sort'] = $sort;
-		
+
 		return self::getSelectDbRes($select);
 	}
 
 	/**
 	 * Generate the markers for a job category.
-	 * This method extend the markers created by the getMarkerFromArr method. 
-	 * 
+	 * This method extend the markers created by the getMarkerFromArr method.
+	 *
 	 * @param array $row The data to create the markers
 	 * @param mixed $object An optional parameter here used to create the job link title marker
 	 * @return array The marker for a job
@@ -137,7 +137,7 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 	 */
 	public function getMarker($row, $object = NULL) {
 		$markerArray = $this->getMarkerFromArr($row);
-		
+
 		$parameter = $this->getLinkParameter(
 			array(
 				'jobcategory::select' => $object,
@@ -148,16 +148,16 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 
 		return $markerArray;
 	}
-	
+
 	/**
 	 * The method selects the jobs for a job category and fills them in the template.
-	 * This method fills selects the jobs for a job category. If the user set's the view 
-	 * option to CJS it also selects only the selected job. 
-	 * The method first gets all the job UIDs in the category, then it iterates thru the 
+	 * This method fills selects the jobs for a job category. If the user set's the view
+	 * option to CJS it also selects only the selected job.
+	 * The method first gets all the job UIDs in the category, then it iterates thru the
 	 * result and fills the template.
-	 * 
+	 *
 	 * @param int $uid
-	 * @param mixed $template 
+	 * @param mixed $template
 	 * @return string
 	 * @author Christoph Gostner
 	 */
@@ -170,19 +170,19 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 		$jobUidArr = self::getJobCategoryJobUid($uid);
 		$select['where'][] = 'tx_cgswigmore_jobs.uid IN ('.implode(',', $jobUidArr).')';
 		$res = $this->getDbResult($this->conf['job.']['sort'], $select);
-		
+
 		$content = '';
 		while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))  {
 			$content .= $this->fillJobTemplateRow($row, $template, $uid);
 		}
 		return $content;
 	}
-	
+
 	/**
 	 * The method fills a job in the template and returns the result.
 	 * The method also fills the job's contact subpart.
-	 * 
-	 * @param array $row The job's data to fill in the template 
+	 *
+	 * @param array $row The job's data to fill in the template
 	 * @param mixed $template The template to fill
 	 * @param int $uid The UID of the job category we need to produce the correct markers
 	 * @return string The filled template
@@ -190,23 +190,23 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 	 */
 	private function fillJobTemplateRow($row, $template, $uid) {
 		$markerArray = $this->getMarker($row, $uid);
-		
+
 		$subpartArray['###TEMPLATE_JOB_ROW_CONTACT###'] = $this->fillJobContactTemplate($row['uid'], $this->getSubTemplate($template, '###TEMPLATE_JOB_ROW_CONTACT###'));
-		
+
 		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}
-	
+
 	/**
 	 * The method fills the job conatcts in the template.
 	 * This method uses the tx_cgswigmore_staff class to fill the template.
 	 * Thru the tx_cgswigmore_factory class we get a reference to the the
-	 * tx_cgswigmore_staff class. For this reason the template used for the 
-	 * contact list is defined in the staff's template, and not in the job's 
+	 * tx_cgswigmore_staff class. For this reason the template used for the
+	 * contact list is defined in the staff's template, and not in the job's
 	 * template. The marker to identify this template part is called
 	 * '###TEMPLATE_JOB_ROW_CONTACT_ROW###'.
-	 * To get only those staff contact's that are referenced to the selected 
-	 * job, the staff's query is modify to only contain this employee.   
-	 * 
+	 * To get only those staff contact's that are referenced to the selected
+	 * job, the staff's query is modify to only contain this employee.
+	 *
 	 * @param int $uid The UID of the job we want the contacts from
 	 * @param mixed $template The template to fill in the contacts
 	 * @return string The filled template
@@ -215,20 +215,20 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 	 */
 	private function fillJobContactTemplate($uid, $template) {
 		$markerArray = $this->getTemplateMarkers();
-		
+
 		$staffUidArr = self::getJobContactStaffUid($uid);
 		$staff = tx_cgswigmore_factory::getInstance('tx_cgswigmore_staff');
 		$staff->setMasterTemplateMarker('###TEMPLATE_JOB_CONTACT###');
 		$select['where'][] = 'tx_cgswigmore_staff.uid IN (' . implode(',', $staffUidArr) . ')';
-		
+
 		$subpartArray['###TEMPLATE_JOB_ROW_CONTACT_ROW###'] = $staff->init($select);
-		
+
 		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}
 
 	/**
 	 * Get the avaiable job categories.
-	 * 
+	 *
 	 * @param string $sort How the job categories should be sorted
 	 * @param array $select To predefine a part of the SQL query
 	 * @return resource The resource holding all aviable job categories
@@ -245,10 +245,10 @@ class tx_cgswigmore_job extends tx_cgswigmore_helper_base {
 
 		return self::getSelectDbRes($select);
 	}
-	
+
 	/**
 	 * Generate the markers for a job category.
-	 * 
+	 *
 	 * @param array $row The data to create the markers
 	 * @return array The marker for a job category
 	 * @author Christoph Gostner

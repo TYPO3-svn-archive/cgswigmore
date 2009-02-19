@@ -71,7 +71,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 *
 	 * @var tx_cgswigmore_pi1
 	 */
-	protected $tx_reference; /* TODO */
+	protected $tx_reference;
 	/**
 	 * The cObj object of the tx_cgswigmore_pi1 class
 	 *
@@ -158,7 +158,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 
 		return !is_null($this->templateCode);
 	}
-	
+
 	/***********************************************************************
 	 * Implementation of interface method(s)
 	 ***********************************************************************/
@@ -173,11 +173,11 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 */
 	public function fillTemplateWithResource($res, $template) {
 		$content = '';
-		
+
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 			$content .= $this->fillRow($row, $template);
 		}
-		
+
 		return $content;
 	}
 
@@ -310,10 +310,10 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	protected function getSubTemplate($template, $subpart) {
 		return $this->cObj->getSubpart($template, $subpart);
 	}
-	
+
 	/**
 	 * Get markers for the template
-	 * 
+	 *
 	 * @return array The template markers for the template
 	 * @author Christoph Gostner
 	 */
@@ -323,6 +323,12 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		$markerArray['###TEMPLATE_PUBLICATION_PAGE_TITLE###'] = $this->getLL('tx_cgswigmore_pi1_publication_title');
 		$markerArray['###TEMPLATE_VIEW_LPY_SUBMIT###'] = $this->getLL('tx_cgswigmore_pi1_publication_update');
 		$markerArray['###TEMPLATE_VIEW_LPY_ACTION_URL###'] = $this->tx_reference->pi_linkTP_keepPIvars_url();
+
+		// TODO workaround to get the extension's attributes
+		if (isset($_GET['tx_cgswigmore_pi1']) && is_array($_GET['tx_cgswigmore_pi1'])) {
+			$markerArray['###TEMPLATE_VIEW_LPY_ACTION_URL###'] = $this->tx_reference->pi_linkTP_keepPIvars_url($_GET['tx_cgswigmore_pi1']);
+		}
+
 		/* staff */
 		$markerArray['###TEMPLATE_STAFF_PAGE_TITLE###'] = $this->getLL('tx_cgswigmore_pi1_staff_title');
 		/* location */
@@ -331,7 +337,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		$markerArray['###TEMPLATE_JOB_PAGE_TITLE###'] = $this->getLL('tx_cgswigmore_pi1_jobs_page_title');
 		$markerArray['###TEMPLATE_JOB_PAGE_TEXT###'] = $this->getLL('tx_cgswigmore_pi1_jobs_page_text');
 		$markerArray['###TEMPLATE_JOB_PAGE_CONTACT###'] = $this->getLL('tx_cgswigmore_pi1_job_contact');
-	
+
 		return $markerArray;
 	}
 
@@ -347,10 +353,10 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	protected function substituteMarkerArrayCached($template, $marks = array(), $subpartArray = array()) {
 		return $this->cObj->substituteMarkerArrayCached($template, $marks, $subpartArray);
 	}
-	
+
 	/**
 	 * This method gets the text in the currently used language.
-	 * 
+	 *
 	 * @param string $langKey The key to get the correct language text
 	 * @return string The text in the corrected language
 	 * @author Christoph Gostner
@@ -532,62 +538,61 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 
 	/**
 	 * Get the language query part to support multilanguage tables.
-	 * 
+	 *
 	 * @param string $table A table with language support
 	 * @return string A part of the SQL query
 	 * @author Christoph Gostner
 	 */
 	protected function getLangQueryPart($table) {
 		if ($this->getLanguageMode() == 'strict' && $GLOBALS['TSFE']->sys_language_content) {
-			// TODO: multilanguage support when not content_fallback, but how?!?
-		} else { // language
+		} else {
 			return '((' . $table . '.sys_language_uid IN (0,-1)) OR (' . $table . '.sys_language_uid='.$GLOBALS['TSFE']->sys_language_content.' AND '. $table . '.l18n_parent=0))';
 		}
 	}
-	
+
 	/**
 	 * Get the language id for the page.
-	 * 
+	 *
 	 * @return int The language id
 	 * @author Christoph Gostner
 	 */
 	protected function getLanguageId() {
 		return $this->tx_reference->getLanguageId();
 	}
-	
+
 	/**
 	 * The method returns the language mode.
-	 * 
+	 *
 	 * @return string The language mode
 	 * @author Christoph Gostner
 	 */
 	protected function getLanguageMode() {
 		return $this->tx_reference->getLanguageMode();
 	}
-	
+
 	/**
 	 * Get the upload directory for the extension.
-	 * 
+	 *
 	 * @return string The upload directory for the extension
 	 * @author Christoph Gostner
 	 */
 	protected function getUploadDir() {
 		return $this->tx_reference->getUploadDir();
 	}
-	
+
 	/**
 	 * Get the mime type directory.
-	 * 
+	 *
 	 * @return string The mime directory
 	 * @author Christoph Gostner
 	 */
 	protected function getMimeDir() {
 		return $this->tx_reference->getMimeDir();
 	}
-	
+
 	/**
 	 * The method calls a user function and returns the result.
-	 * 
+	 *
 	 * @param string $userFunc The user function to call
 	 * @param array $row The data to pass to the user function
 	 * @return mixed The result of the user function call
@@ -618,10 +623,10 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		}
 		return $markerArray;
 	}
-	
+
 	/**
 	 * Create the parameter part for typolink.
-	 * 
+	 *
 	 * @param array $array The parameter to use the link
 	 * @return string The parameter part for typolink
 	 * @author Christoph Gostner
@@ -823,7 +828,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		}
 		return $sectionUidArr;
 	}
-	
+
 	/**
 	 * This method returns all avaiable files for a section.
 	 *
@@ -836,7 +841,7 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		$select['table'][] = 'tx_cgswigmore_section_files_mm';
 		$select['where'][] = 'tx_cgswigmore_section_files_mm.uid_local = ' . $uid;
 		$res = self::getSelectDbRes($select);
-		
+
 		if ($GLOBALS['TYPO3_DB']->sql_num_rows($res) == 0)
 			return array(0);
 

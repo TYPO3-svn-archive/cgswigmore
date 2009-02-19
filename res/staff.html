@@ -29,16 +29,16 @@ Staff specific:
 ###STAFF_LINK_SECTION###
 ###STAFF_SECTION###
 
-###TEMPLATE###
-
+Template for the staff list
+This list is for active members, those have a link to their personal profile
+<!-- ###TEMPLATE### start -->
 	<div class="tx-cgswigmore-pi1-DIV-box">
 		<h1>
 			###TEMPLATE_STAFF_PAGE_TITLE###
 		</h1>
-		
 		<ul>
 			<!-- ###TEMPLATE_STAFF_ROW### start -->
-				<li class="tx-cgswigmore-pi1-LI-person">
+				<li>
 					###STAFF_LINK_SPRINTF_FIRSTNAME_NAME###
 					(###STAFF_LINK_SECTION###)
 				</li>
@@ -47,9 +47,10 @@ Staff specific:
 		<br />
 		&raquo; ###STAFF_SWITCH_CA_VIEW_ARCHIVED_LINK###
 	</div>
-###TEMPLATE###
+<!-- ###TEMPLATE### end -->
 
-###TEMPLATE_ARCHIVED###
+Template for the archived staff list 
+<!-- ###TEMPLATE_ARCHIVED### start -->
 	<div class="tx-cgswigmore-pi1-DIV-box">
 		<h1>
 			###TEMPLATE_STAFF_PAGE_TITLE###
@@ -57,7 +58,7 @@ Staff specific:
 		
 		<ul>
 			<!-- ###TEMPLATE_STAFF_ROW### start -->
-				<li class="tx-cgswigmore-pi1-LI-person">
+				<li>
 					###STAFF_SPRINTF_FIRSTNAME_NAME###
 					(###STAFF_SECTION###)
 				</li>
@@ -66,72 +67,68 @@ Staff specific:
 		<br />
 		&raquo; ###STAFF_SWITCH_CA_VIEW_CURRENT_LINK###
 	</div>
-###TEMPLATE_ARCHIVED###
+<!-- ###TEMPLATE_ARCHIVED### end -->
 
-###TEMPLATE_DETAIL###
+Template for the detailed page about for a staff member
+<!-- ###TEMPLATE_DETAIL### start -->
 	<!-- ###TEMPLATE_STAFF_ROW### start -->
 	<div class="tx-cgswigmore-pi1-DIV-box">
-		<h1 class="tx-cgswigmore-pi1-H1-title">
+		<h1>
 			###STAFF_TITLE### ###STAFF_FIRSTNAME### ###STAFF_NAME###
 		</h1>
-		
 		###STAFF_IMAGE###
-		
-		<!-- TODO: implement the subparts -->
-		<ul class="tx-cgswigmore-pi1-UL-detail">
+		<ul>
 			<!-- ###STAFF_PHONE_ITEM### begin -->
 				<li class="tx-cgswigmore-pi1-LI-phone">###STAFF_PHONE###</li>
 			<!-- ###STAFF_PHONE_ITEM### end -->
-
 			<!-- ###STAFF_MOBILE_ITEM### begin -->
 				<li class="tx-cgswigmore-pi1-LI-mobile">###STAFF_MOBILE###</li>
 			<!-- ###STAFF_MOBILE_ITEM### end -->
-			
 			<!-- ###STAFF_FAX_ITEM### begin -->
 				<li class="tx-cgswigmore-pi1-LI-fax">###STAFF_FAX###</li>
 			<!-- ###STAFF_FAX_ITEM### end -->
-			
 			<!-- ###STAFF_MAIL_ITEM### begin -->
 				<li class="tx-cgswigmore-pi1-LI-mail">###STAFF_MAIL###</li>
 			<!-- ###STAFF_MAIL_ITEM### end -->
 		</ul>
-		<br />
-		<p class="tx-cgswigmore-pi1-P-description">
+		<p>
 			###STAFF_DESCRIPTION###
 		</p>
 	</div>
-	
 	<div class="tx-cgswigmore-pi1-DIV-box">
 		<!-- ###TEMPLATE_STAFF_PUBLICATION### start -->
-				
+			This is the template marker for the publication's list.
+			For the template definition please open the file publication.html
 		<!-- ###TEMPLATE_STAFF_PUBLICATION### end -->
 	</div>
-	
 	<!-- ###TEMPLATE_STAFF_ROW### end -->
-###TEMPLATE_DETAIL###
+<!-- ###TEMPLATE_DETAIL### end -->
 
-###TEMPLATE_SECTION###
+Template for the section leader nr. 1 and nr. 2.
+<!-- ###TEMPLATE_SECTION_LEADER### start -->
+	<!-- ###TEMPLATE_STAFF_ROW### start -->
+		###STAFF_LINK_SPRINTF_NAME###
+	<!-- ###TEMPLATE_STAFF_ROW### end -->
+<!-- ###TEMPLATE_SECTION_LEADER### end -->
+
+Template for the staff list of a section.
+<!-- ###TEMPLATE_SECTION### start  -->
 	<h1>
 		###TEMPLATE_STAFF_PAGE_TITLE###
 	</h1>
 	
 	<ul>
 		<!-- ###TEMPLATE_STAFF_ROW### start -->
-			<li class="tx-cgswigmore-pi1-LI-person">
+			<li>
 				###STAFF_LINK_SPRINTF_FIRSTNAME_NAME###
 			</li>
 		<!-- ###TEMPLATE_STAFF_ROW### end -->
 	</ul>
-###TEMPLATE_SECTION###
+<!-- ###TEMPLATE_SECTION### end  -->
 
-###TEMPLATE_SECTION_LEADER###
-	<!-- ###TEMPLATE_STAFF_ROW### start -->
-		###STAFF_LINK_SPRINTF_NAME###
-	<!-- ###TEMPLATE_STAFF_ROW### end -->
-###TEMPLATE_SECTION_LEADER###
-
-###TEMPLATE_JOB_CONTACT###
+Template for the contact person of a job.
+<!-- ###TEMPLATE_JOB_CONTACT### start -->
 	<!-- ###TEMPLATE_STAFF_ROW### end -->
 	###STAFF_TITLE### ###STAFF_FIRSTNAME### <b>###STAFF_NAME###</b> <###STAFF_MAIL###> <br />
 	<!-- ###TEMPLATE_STAFF_ROW### end -->
-###TEMPLATE_JOB_CONTACT###
+<!-- ###TEMPLATE_JOB_CONTACT### end -->

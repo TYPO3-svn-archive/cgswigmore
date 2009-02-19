@@ -1,1 +1,1 @@
-@see manual.sxw
+@see doc/manual.sxw

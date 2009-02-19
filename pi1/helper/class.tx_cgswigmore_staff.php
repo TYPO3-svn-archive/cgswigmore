@@ -32,7 +32,7 @@ require_once (t3lib_extMgm::extPath('cgswigmore').'pi1/helper/util/class.tx_cgsw
  * @subpackage	tx_cgswigmore
  */
 class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
-	
+
 	private $createSectionLink;
 
 	/**
@@ -41,12 +41,12 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 	 * Additional markers are defined in tx_cgswigmore_staff->getMarker(...)
 	 *
 	 * @return void
-	 * @author Christoph Gostner 
+	 * @author Christoph Gostner
 	 * @see pi1/helper/tx_cgswigmore_staff#getMarker()
 	 */
 	public function __construct() {
 		parent::__construct();
-		
+
 		$this->createSectionLink = true;
 		$this->tableKeys = array(
 			'uid',
@@ -65,7 +65,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 
 	/**
 	 * Fill the template for the employee.
-	 * If a staff id is selected the masterTemplateMarker is set to 
+	 * If a staff id is selected the masterTemplateMarker is set to
 	 * ###TEMPLATE_DETAIL###.
 	 *
 	 * @return string The filled template with the employee
@@ -92,10 +92,10 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$template = $this->getTemplateParts($this->masterTemplateMarker, array('###TEMPLATE_STAFF_ROW###'));
 		$markerArray = $this->getPageMarker();
 		$subpartArray['###TEMPLATE_STAFF_ROW###'] = $this->fillTemplateWithResource($res, $template['item0']);
-		
+
 		return $this->substituteMarkerArrayCached($template['total'], $markerArray, $subpartArray);
 	}
-	
+
 	/**
 	 * This method fills a single staff member in the subtemplate.
 	 *
@@ -115,13 +115,13 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 
 		return $this->substituteMarkerArrayCached($template, $markerArray, $subpartArray);
 	}
-	
+
 	/**
-	 * The method returns the selected employee. 
-	 * If the staff's scope is set, the SQL query is modified to only get those 
+	 * The method returns the selected employee.
+	 * If the staff's scope is set, the SQL query is modified to only get those
 	 * members, that are archived/no more active members and the masterTemplateMarker
 	 * is set to ###TEMPLATE_ARCHIVED###.
-	 * 
+	 *
 	 * @param string $sort Sort order for the result
 	 * @param array $select Optional predefined SQL arguments
 	 * @return resource The resource holding the selected employee
@@ -137,7 +137,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 
 		// find out if the current or the archived members should be displayed.
 		$staffSelect = intval($this->getGvalue('staff::scope'));
-		
+
 		if ($staffSelect === self::STAFF_SELECT_ARCHIVED) {
 			$this->masterTemplateMarker = '###TEMPLATE_ARCHIVED###';
 			$staffSelect = self::STAFF_SELECT_CURRENT;
@@ -148,7 +148,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		}
 		return self::getSelectDbRes($select);
 	}
-	
+
 	/**
 	 * This function sets all markers for the staff.
 	 *
@@ -159,7 +159,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 	 */
 	public function getMarker($row, $object = NULL) {
 		$markerArray = $this->getMarkerFromArr($row);
-		
+
 		if (isset($this->conf['link.']['sprintf'])) {
 			$f = $row['firstname'];
 			$l = $row['name'];
@@ -168,21 +168,21 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 
 			$markerArray['###STAFF_SPRINTF_FIRSTNAME_NAME###'] = $fl;
 			$markerArray['###STAFF_SPRINTF_NAME_FIRSTNAME###'] = $lf;
-			
+
 			$typos['parameter'] = '';
 			$parameter = $this->getLinkParameter(array('staff::select' => $row['uid']), 0, 0, $this->conf['staffUID']);
 			$markerArray['###STAFF_LINK_SPRINTF_FIRSTNAME###'] = $this->createLink($parameter, $f);
 			$markerArray['###STAFF_LINK_SPRINTF_NAME###'] = $this->createLink($parameter, $l);
-			
+
 			$markerArray['###STAFF_LINK_SPRINTF_FIRSTNAME_NAME###'] = $this->createLink($parameter, $fl);
-			$markerArray['###STAFF_LINK_SPRINTF_NAME_FIRSTNAME###'] = $this->createLink($parameter, $lf); 
+			$markerArray['###STAFF_LINK_SPRINTF_NAME_FIRSTNAME###'] = $this->createLink($parameter, $lf);
 		}
-		
+
 		$markerArray['###STAFF_MAIL###'] = $this->createLink($row['mail']);
 		$markerArray['###STAFF_IMAGE###'] = '';
 		if (is_file($this->getUploadDir() . $row['image']))
 			$markerArray['###STAFF_IMAGE###'] = $this->createImage($row['image'], $this->conf['image.']);
-		
+
 		if ($this->createSectionLink) {
 			$markerArray['###STAFF_LINK_SECTION###'] = $this->getSectionMarker($row['uid']);
 			$markerArray['###STAFF_SECTION###'] = $this->getSectionMarker($row['uid'], false);
@@ -192,7 +192,7 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 
 	/**
 	 * The method fills the subtemplate for the phone number, the mobile number, fax number and email.
-	 * 
+	 *
 	 * @param array $row The employee's data
 	 * @param string $columnName The name of the column in the data array
 	 * @param mixed $template The template to fill
@@ -208,10 +208,10 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		}
 		return '';
 	}
-	
+
 	/**
 	 * Fill the subpart template with all the publication's of the staff member.
-	 * 
+	 *
 	 * @param mixed $template
 	 * @param int $uid
 	 * @return string
@@ -220,24 +220,24 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 	 */
 	private function fillRowSubpartPublicationTemplate($template, $uid) {
 		$publicationUidArr = self::getUserPublicationUids($uid);
-		
+
 		$publ = &tx_cgswigmore_factory::getInstance('tx_cgswigmore_publication');
 		$select['where'][] = 'tx_cgswigmore_publication.uid IN ('.implode(',', $publicationUidArr).')';
 
 		return $publ->init($select);
 	}
-	
+
 	/**
 	 * The method fills the sections in the template.
 	 * This method uses the tx_cgswigmore_section class to fill the template.
 	 * Thru the tx_cgswigmore_factory class we get a reference to the
-	 * tx_cgswigmore_section class. For this reason the template used for the 
-	 * section list is defined in the section's template, and not in the staff's 
-	 * template. 
-	 * To get only those sections that are referenced to the selected 
+	 * tx_cgswigmore_section class. For this reason the template used for the
+	 * section list is defined in the section's template, and not in the staff's
+	 * template.
+	 * To get only those sections that are referenced to the selected
 	 * employee, the section's query is modify to only contain the staff member's
 	 * sections.
-	 * 
+	 *
 	 * @param int $uid The staff's UID
 	 * @param boolean $link Which master template marker should be used, linked or not?
 	 * @return string
@@ -251,15 +251,15 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 			$idArr = split(',', $this->conf['section.']['doNotLink']);
 			$section = tx_cgswigmore_factory::getInstance('tx_cgswigmore_section');
 			$section->createStaffLinks(false);
-			
+
 			if ($link) {
 				$diff = array_diff($sectionUidArr, $idArr);
 				if (count($diff) == 0) $diff[] = 0;
-				
+
 				$section->setMasterTemplateMarker('###TEMPLATE_STAFF_LINK_SECTION###');
 				$select['where'][] = 'tx_cgswigmore_section.uid IN (' . implode(',', $diff) . ')';
 				$content = $section->init($select); // first those which should be linked
-				
+
 				$intersect = array_intersect($sectionUidArr, $idArr);
 				if (count($intersect) > 0) {
 					$section->setMasterTemplateMarker('###TEMPLATE_STAFF_SECTION###');
@@ -268,18 +268,18 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 					$content .= $section->init($select); // then those without links
 				}
 			} else {
-				$select['where'][] = 'tx_cgswigmore_section.uid IN (' . implode(',', $sectionUidArr) . ')'; 
+				$select['where'][] = 'tx_cgswigmore_section.uid IN (' . implode(',', $sectionUidArr) . ')';
 				$section->setMasterTemplateMarker('###TEMPLATE_STAFF_SECTION###');
 				$content = $section->init($select);
 			}
 		}
 		return $content;
 	}
-	
+
 	/**
 	 * This method creates the markers that are used to select the current and the archived members.
-	 * 
-	 * @return array The markers for the template 
+	 *
+	 * @return array The markers for the template
 	 * @author Christoph Gostner
 	 */
 	private function getPageMarker() {
@@ -289,13 +289,13 @@ class tx_cgswigmore_staff extends tx_cgswigmore_helper_base {
 		$markerArray['###STAFF_SWITCH_CA_VIEW_ARCHIVED_LINK###'] = $this->createLink($parameter, $this->getLL('tx_cgswigmore_pi1_section_staff_link_previous'));
 		$parameter = $this->getLinkParameter(array('staff::scope' => self::STAFF_SELECT_CURRENT)) . ' _SELF ' . $linkClass;
 		$markerArray['###STAFF_SWITCH_CA_VIEW_CURRENT_LINK###'] = $this->createLink($parameter, $this->getLL('tx_cgswigmore_pi1_section_staff_link_current'));
-		
+
 		return $markerArray;
 	}
-	
+
 	/**
 	 * With this method you can modify, if the staff markers contain also the employee's sections.
-	 * 
+	 *
 	 * @param boolean $sectionLink If the two markers are created or not
 	 * @return void
 	 * @author Christoph Gostner

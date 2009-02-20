@@ -168,18 +168,25 @@ class tx_cgswigmore_publication extends tx_cgswigmore_helper_base {
 	 */
 	public function getMarker($row, $object = NULL) {
 		$markerArray = $this->getMarkerFromArr($row);
-		$markerArray['###PUBLICATION_LINK###'] = '';
+		$markerArray['###PUBLICATION_TITLE_LINK###'] = '';
 
 		if ($row['date'] != 0) {
 			$markerArray['###PUBLICATION_DATE###'] = date('j M Y', $row['date']);
 		} else {
 			$markerArray['###PUBLICATION_DATE###'] = '';
 		}
-		if (isset($this->conf['link']) && $this->conf['link']) {
-			$userFunc = $this->conf['link.']['userFunc'];
-			$link = $this->callUserFunc($userFunc, $row);
+		if (isset($this->conf['link']) && $this->conf['link'] &&
+			isset($this->conf['link.']['userFunc']) &&
+			isset($this->conf['link.']['field'])) {
 
-			$markerArray['###PUBLICATION_LINK###'] = $link;
+			$userFunc = $this->conf['link.']['userFunc'];
+			$data = array(
+				'ref' => &$this->tx_reference,
+				'field' => $this->conf['link.']['field']
+			);
+			$link = $this->callUserFunc($userFunc, $row, $data);
+
+			$markerArray['###PUBLICATION_TITLE_LINK###'] = $link;
 		}
 		return $markerArray;
 	}

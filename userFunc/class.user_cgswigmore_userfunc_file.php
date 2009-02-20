@@ -30,14 +30,22 @@
  * @subpackage	tx_cgswigmore
  */
 class user_cgswigmore_userfunc_file {
-	
-	function linkFile(&$row, &$ref) {
-		$uploadPath = $ref->getUploadDir();
-		$fullPath = $uploadPath . $row['file'];
-		
-		if (is_file($fullPath)) 
-			return $fullPath;
-		return '';
+
+	function linkFile(&$row, $data) {
+		$ref = $data['ref'];
+		$field = $data['field'];
+		$uploadDir = $ref->getUploadDir();
+
+		$filePath = $uploadDir . $row['file'];
+		if (is_file($filePath)) {
+			$typolink_conf['parameter'] = $filePath;
+			return $ref->cObj->typolink($row[$field], $typolink_conf);
+		}
+		return $row[$field];
 	}
+}
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cgswigmore/userFunc/class.user_cgswigmore_userfunc_file.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cgswigmore/userFunc/class.user_cgswigmore_userfunc_file.php']);
 }
 ?>

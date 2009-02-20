@@ -30,9 +30,23 @@
  * @subpackage	tx_cgswigmore
  */
 class user_cgswigmore_userfunc_pubmed {
-	
-	function linkPubMed(&$row) {
-		return 'http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=' . $row['pmid'];
+
+	function linkPubMed(&$row, $data) {
+		$ref = $data['ref'];
+		$field = $data['field'];
+
+		$pmid = $row['pmid'];
+		$text = $row[$field];
+
+		if (strlen($pmid) > 0 && intval($pmid) > 0) {
+			$typolink_conf['parameter'] = 'http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=' . intval($pmid);
+			return $ref->cObj->typolink($row[$field], $typolink_conf);
+		}
+		return $text;
 	}
+}
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cgswigmore/userFunc/class.user_cgswigmore_userfunc_pubmed.php'])	{
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cgswigmore/userFunc/class.user_cgswigmore_userfunc_pubmed.php']);
 }
 ?>

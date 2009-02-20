@@ -48,6 +48,35 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	const SECTION_SELECT_PUBLICATION = 4;
 
 	/**
+	 * Get the icon <img /> tag of the file's mime type.
+	 *
+	 * @param $file The file to check
+	 * @param $mimedir The mime icon directory
+	 * @return string The <img /> tag for the file's mime type
+	 * @author Christoph Gostner
+	 */
+	public static function getMimeTypeIcon($file, $mimedir) {
+		$mime = array(
+			'image' => array( 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'tiff' ),
+			'pdf' => array( 'application/pdf' ),
+			'document' => array( 'application/msword', 'application/zip' ),
+			'generic' => array( 'text/plain' ),
+		);
+		$type = mime_content_type($file);
+		$fullPath = $mimedir . 'generic.png';
+
+		if (in_array($type, $mime['image'])) {
+			$fullPath = $mimedir . 'image.png';
+		} else if (in_array($type, $mime['pdf'])) {
+			$fullPath = $mimedir . 'pdf.png';
+		} else if (in_array($type, $mime['document'])) {
+			$fullPath = $mimedir . 'document.png';
+		}
+		$img['file'] = $fullPath;
+		return $GLOBALS['TSFE']->cObj->IMAGE($img);
+	}
+
+	/**
 	 * The master template marker is used when a template file initially is read.
 	 *
 	 * @var string
@@ -427,14 +456,14 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	protected function getFileIconLink($row) {
 		$fullPath = $this->getUploadDir() . $row['file'];
 		if (is_file($fullPath)) {
-			$image = $this->checkMimeTypeImage($fullPath);
-
 			$typolink_conf['parameter'] = array();
 			if (isset($this->conf['icon.']['userFunc'])) {
 				$userFunc = $this->conf['icon.']['userFunc'];
-				$typolink_conf['parameter'] = t3lib_div::callUserFunction($userFunc, $row, &$this->tx_reference);
+				$data = array(
+					'ref' => &$this->tx_reference,
+				);
+				return t3lib_div::callUserFunction($userFunc, $row, $data);
 			}
-			return $this->cObj->typolink($image, $typolink_conf);
 		}
 		return '';
 	}
@@ -595,11 +624,12 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 	 *
 	 * @param string $userFunc The user function to call
 	 * @param array $row The data to pass to the user function
+	 * @param array $data The data to submit to the user function (includes reference and the field option)
 	 * @return mixed The result of the user function call
 	 * @author Christoph Gostner
 	 */
-	protected function callUserFunc($userFunc, $row) {
-		return t3lib_div::callUserFunction($userFunc, $row, &$this->tx_reference);
+	protected function callUserFunc($userFunc, $row, $data) {
+		return t3lib_div::callUserFunction($userFunc, $row, $data);
 	}
 
 	/**
@@ -648,35 +678,6 @@ abstract class tx_cgswigmore_helper_base implements tx_cgswigmore_helper_base_in
 		$className = strtoupper($this->getDbTableName());
 		return '###'.$className . '_' . strtoupper($key) . '###';
 	}
-
-	/**
-	 * Check the mime type of the file and return the image object.
-	 *
-	 * @param string $file The file to check the mimetype.
-	 * @return mime type to image: pdf, document,  image, generic
-	 * @author Christoph Gostner
-	 */
-	private function checkMimeTypeImage($file) {
-		$mime = array(
-			'image' => array( 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'tiff' ),
-			'pdf' => array( 'application/pdf' ),
-			'document' => array( 'application/msword', 'application/zip' ),
-			'generic' => array( 'text/plain' ),
-		);
-		$type = mime_content_type($file);
-		$fullPath = $this->getMimeDir() . 'generic.png';
-
-		if (in_array($type, $mime['image'])) {
-			$fullPath = $this->getMimeDir() . 'image.png';
-		} else if (in_array($type, $mime['pdf'])) {
-			$fullPath = $this->getMimeDir() . 'pdf.png';
-		} else if (in_array($type, $mime['document'])) {
-			$fullPath = $this->getMimeDir() . 'document.png';
-		}
-		$img['file'] = $fullPath;
-		return $GLOBALS['TSFE']->cObj->IMAGE($img);
-	}
-
 
 	/***********************************************************************
 	 * Static methods to get cross references in the database

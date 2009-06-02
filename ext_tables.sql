@@ -101,7 +101,6 @@ CREATE TABLE tx_cgswigmore_staff_section_mm (
   uid_local int(11) DEFAULT '0' NOT NULL,
   uid_foreign int(11) DEFAULT '0' NOT NULL,
   tablenames varchar(30) DEFAULT '' NOT NULL,
-  position varchar(30) DEFAULT '' NOT NULL,
   sorting int(11) DEFAULT '0' NOT NULL,
   KEY uid_local (uid_local),
   KEY uid_foreign (uid_foreign)
